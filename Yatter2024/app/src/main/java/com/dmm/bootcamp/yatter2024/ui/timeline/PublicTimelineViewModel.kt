@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.dmm.bootcamp.yatter2024.common.navigation.Destination
 import com.dmm.bootcamp.yatter2024.domain.repository.StatusRepository
 import com.dmm.bootcamp.yatter2024.ui.post.PostDestination
+import com.dmm.bootcamp.yatter2024.ui.profile.ProfileDestination
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -28,6 +29,10 @@ class PublicTimelineViewModel(
                 statusList = StatusConverter.convertToBindingModel(statusList), // 2
             )
         }
+    }
+
+    fun onClickProfile(){
+        _destination.value = ProfileDestination()
     }
 
     fun onClickPost() {

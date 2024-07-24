@@ -1,20 +1,31 @@
 package com.dmm.bootcamp.yatter2024.ui.timeline
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.BottomAppBar
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -34,6 +45,7 @@ fun PublicTimelineTemplate(
     isRefreshing: Boolean,
     onRefresh: () -> Unit,
     onClickPost: () -> Unit,
+    onClickProfile: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -51,6 +63,47 @@ fun PublicTimelineTemplate(
                 )
             }
         },
+        bottomBar = {
+            BottomAppBar {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Home,
+                            contentDescription = "home"
+                        )
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "search"
+                        )
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Notifications,
+                            contentDescription = "notification"
+                        )
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Email,
+                            contentDescription = "email"
+                        )
+                    }
+                    IconButton(onClick =  onClickProfile) {
+                        Icon(
+                            imageVector = Icons.Default.AccountCircle,
+                            contentDescription = "accountcircle"
+                        )
+                    }
+                }
+            }
+        }
     ) { paddingValues ->
         val pullRefreshState = rememberPullRefreshState(isRefreshing, onRefresh)
         Box(
@@ -97,7 +150,8 @@ private fun PublicTimelineTemplatePreview() {
                     ),
                     StatusBindingModel(
                         id = "id2",
-                        displayName = "display name2",
+                        displayName = "displa" +
+                                "y name2",
                         username = "username2",
                         avatar = null,
                         content = "preview content2",
@@ -108,6 +162,7 @@ private fun PublicTimelineTemplatePreview() {
                 isRefreshing = false,
                 onRefresh = {},
                 onClickPost = {},
+                onClickProfile = {},
             )
         }
     }
