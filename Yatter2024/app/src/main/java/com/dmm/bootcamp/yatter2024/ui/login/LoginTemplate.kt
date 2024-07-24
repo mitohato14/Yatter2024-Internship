@@ -50,7 +50,6 @@ fun LoginTemplate(
                 .fillMaxSize()
                 .padding(it)
                 .padding(8.dp),
-            contentAlignment = Alignment.Center,
         ) {
             Column (modifier = Modifier.fillMaxSize()) {
                 Text(
@@ -112,7 +111,9 @@ fun LoginTemplate(
             }
 
             if(isLoading) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center)
+                )
             }
         }
     }
