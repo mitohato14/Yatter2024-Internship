@@ -2,8 +2,10 @@ package com.dmm.bootcamp.yatter2024.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dmm.bootcamp.yatter2024.common.navigation.Destination
 import com.dmm.bootcamp.yatter2024.domain.model.Password
 import com.dmm.bootcamp.yatter2024.domain.model.Username
+import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineDestination
 import com.dmm.bootcamp.yatter2024.usecase.login.LoginUseCase
 import com.dmm.bootcamp.yatter2024.usecase.login.LoginUseCaseResult
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +20,9 @@ class LoginViewModel(
     private val _uiState: MutableStateFlow<LoginUiState> =
         MutableStateFlow(LoginUiState.empty())
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
+
+    private val _destination = MutableStateFlow<Destination?>(null)
+    val destination: StateFlow<Destination?> = _destination.asStateFlow()
 
     fun onChangedUsername(username: String) {
         val snapshotBindingModel = uiState.value.loginBindingModel
@@ -56,7 +61,11 @@ class LoginViewModel(
             ) {
                 is LoginUseCaseResult.Success -> {
                     // 3
-                    // パブリックタイムライン画⾯に遷移する処理の追加
+                    _destination.value = PublicTimelineDestination {
+                        popUpTo(LoginDestination().route) {
+                            inclusive = true
+                        }
+                    }
                 }
                 is LoginUseCaseResult.Failure -> {
                     // 4
@@ -67,9 +76,12 @@ class LoginViewModel(
         }
     }
 
+
     fun onClickRegister() {
         // _destination.value = RegisterAccountDestination()
     }
 
-    fun onCompleteNavigation() {}
+    fun onCompleteNavigation() {
+        _destination.value = null
+    }
 }

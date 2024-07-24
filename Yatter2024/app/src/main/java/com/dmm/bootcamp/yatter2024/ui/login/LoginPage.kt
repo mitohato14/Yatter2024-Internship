@@ -1,8 +1,10 @@
 package com.dmm.bootcamp.yatter2024.ui.login
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.dmm.bootcamp.yatter2024.ui.LocalNavController
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -21,4 +23,12 @@ fun LoginPage(
         onClickLogin = viewModel::onClickLogin,
         onClickRegister = viewModel::onClickRegister,
     )
+    val destination by viewModel.destination.collectAsStateWithLifecycle()
+    val navController = LocalNavController.current
+    LaunchedEffect(destination) {
+        destination?.let {
+            it.navigate(navController)
+            viewModel.onCompleteNavigation()
+        }
+    }
 }
