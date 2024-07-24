@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dmm.bootcamp.yatter2024.common.navigation.Destination
 import com.dmm.bootcamp.yatter2024.domain.repository.StatusRepository
+import com.dmm.bootcamp.yatter2024.infra.pref.TokenPreferences
 import com.dmm.bootcamp.yatter2024.ui.login.LoginDestination
 import com.dmm.bootcamp.yatter2024.ui.post.PostDestination
 import com.dmm.bootcamp.yatter2024.ui.timeline.bindingmodel.converter.StatusConverter
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 
 class PublicTimelineViewModel(
     private val statusRepository: StatusRepository,
+    private val tokenPreferences: TokenPreferences,
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<PublicTimelineUiState> =
@@ -48,6 +50,7 @@ class PublicTimelineViewModel(
         _destination.value = PostDestination()
     }
     fun onClickLogout(){
+        tokenPreferences.clear()
         _destination.value = LoginDestination()
     }
     fun onCompleteNavigation() {
