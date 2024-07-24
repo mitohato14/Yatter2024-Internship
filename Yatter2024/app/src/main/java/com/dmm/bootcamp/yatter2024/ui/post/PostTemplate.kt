@@ -19,11 +19,19 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -72,12 +80,16 @@ fun PostTemplate(
                 )
 
                 Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp),
                     horizontalAlignment = Alignment.End,
                 ) {
                     TextField(
                         modifier = Modifier
                             .fillMaxWidth() // 横幅最大サイズ確保
-                            .weight(1f), // 他のコンポーザブルのサイズを確保した上で最大サイズを取る
+                            .weight(1f)
+                            .padding(bottom = 16.dp), // 他のコンポーザブルのサイズを確保した上で最大サイズを取る
                         value = postBindingModel.statusText,
                         onValueChange = onStatusTextChanged,
                         colors = TextFieldDefaults.textFieldColors(
@@ -96,11 +108,14 @@ fun PostTemplate(
                         enabled = canPost,
                     ) {
                         Text(text = "ツイート")
+                        Icon(imageVector = Icons.Default.Send, contentDescription = "send")
                     }
                 }
             }
             if (isLoading) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center)
+                )
             }
         }
     }

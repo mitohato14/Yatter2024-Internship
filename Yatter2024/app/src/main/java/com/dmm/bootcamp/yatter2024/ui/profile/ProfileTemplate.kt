@@ -85,7 +85,7 @@ fun ProfileTemplate(
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                    modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
                     text = "フォロー数",
                     textAlign = TextAlign.Center,
                     fontSize = 24.sp,
@@ -102,9 +102,7 @@ fun ProfileTemplate(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(8.dp),
                 ) {
-                    items(statusList) { item ->
-                        StatusRow(statusBindingModel = item)
-                    }
+                    //ここで自分のタイムラインの表示
                 }
 
             }
@@ -119,6 +117,7 @@ private fun LoginTemplatePreview() {
         Surface() {
             ProfileTemplate(
                 //publictimeline参考にする？
+            )
         }
     }
 }

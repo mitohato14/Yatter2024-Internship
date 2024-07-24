@@ -26,10 +26,6 @@ fun ProfilePage(
         viewModel.onCreate()
     }
     ProfileTemplate(
-        profileBindingModel = uiState.bindingModel,
-        isLoading = uiState.isLoading,
-        onStatusTextChanged = {},
-        onClickPost = {},
-        canPost = false,
+
     )
 }

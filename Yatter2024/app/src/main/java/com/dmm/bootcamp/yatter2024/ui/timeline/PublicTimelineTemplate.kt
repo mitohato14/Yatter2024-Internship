@@ -109,6 +109,7 @@ fun PublicTimelineTemplate(
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(paddingValues)
                 .pullRefresh(pullRefreshState),
             contentAlignment = Alignment.Center,
         ) {

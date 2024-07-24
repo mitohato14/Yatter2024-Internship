@@ -1,18 +1,18 @@
 package com.dmm.bootcamp.yatter2024.ui.profile
 import com.dmm.bootcamp.yatter2024.ui.profile.ProfileBindingModel
 import com.dmm.bootcamp.yatter2024.ui.profile.ProfileUiState
+import com.dmm.bootcamp.yatter2024.ui.timeline.bindingmodel.StatusBindingModel
 
 data class ProfileUiState(
-    val bindingModel: ProfileBindingModel,
+    val statusList: List<StatusBindingModel>,
     val isLoading: Boolean,
+    val isRefreshing: Boolean,
 ) {
     companion object {
         fun empty(): ProfileUiState = ProfileUiState(
-            bindingModel = ProfileBindingModel(
-                avatarUrl = null,
-                statusText = ""
-            ),
+            statusList = emptyList(),
             isLoading = false,
+            isRefreshing = false,
         )
     }
 }

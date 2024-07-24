@@ -28,10 +28,10 @@ class ProfileViewModel (private val profileStatusUseCase: ProfileStatusUseCase,
 
             val me = getMeService.execute()
 
-            val snapshotBindingModel = uiState.value.bindingModel
+            //val snapshotBindingModel = uiState.value.bindingModel
             _uiState.update {
                 it.copy(
-                    bindingModel = snapshotBindingModel.copy(avatarUrl = me?.avatar?.toString()),
+                    //bindingModel = snapshotBindingModel.copy(avatarUrl = me?.avatar?.toString()),
                     isLoading = false,
                 )
             }
