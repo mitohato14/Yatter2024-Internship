@@ -32,6 +32,7 @@ fun LoginTemplate(
     isLoading: Boolean,
     onClickLogin: () -> Unit,
     onClickRegister: () -> Unit,
+    errorMessage: String? = null
 ) {
     Scaffold(
         topBar = {
@@ -90,6 +91,15 @@ fun LoginTemplate(
                     Text(text = "ログイン")
                 }
                 Divider(modifier = Modifier.padding(vertical = 16.dp))
+
+                // エラーメッセージを表示
+                errorMessage?.let { errorMessage ->
+                    Text(
+                        text = errorMessage,
+                        color = MaterialTheme.colors.error,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                }
 
                 Text(
                     text = "はじめてご利⽤の⽅は",

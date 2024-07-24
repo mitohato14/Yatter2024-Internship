@@ -25,6 +25,7 @@ class MainViewModel(
             } else {
                 _startDestination.value = LoginDestination()
             }
+            //_startDestination.value = RegisterDestination()
         }
     }
 }

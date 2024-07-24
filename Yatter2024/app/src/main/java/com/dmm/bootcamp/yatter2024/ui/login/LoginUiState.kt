@@ -5,6 +5,7 @@ data class LoginUiState(
     val isLoading: Boolean,
     val validUsername: Boolean,
     val validPassword: Boolean,
+    val errorMessage: String?
 )  {
     val isEnableLogin: Boolean = validUsername && validPassword
     companion object {
@@ -16,6 +17,7 @@ data class LoginUiState(
             validUsername = false,
             validPassword = false,
             isLoading = false,
+            errorMessage = null
         )
     }
 }

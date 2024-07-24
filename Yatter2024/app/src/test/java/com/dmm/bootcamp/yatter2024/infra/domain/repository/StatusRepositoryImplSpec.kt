@@ -40,7 +40,6 @@ class StatusRepositoryImplSpec {
           header = "https://www.google.com",
           followingCount = 100,
           followersCount = 200,
-          createdAt = "2023-06-02T12:44:35.030Z"
         ),
         content = "content",
         createdAt = "2023-06-02T12:44:35.030Z",
@@ -95,7 +94,6 @@ class StatusRepositoryImplSpec {
         header = "https://www.google.com",
         followingCount = 0,
         followersCount = 0,
-        createdAt = ""
       ),
       content = content,
       createdAt = "",

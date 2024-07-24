@@ -12,4 +12,6 @@ internal val useCaseModule = module {
   factory<PostStatusUseCase> { PostStatusUseCaseImpl(get()) }
   factory<RegisterAccountUseCase> { RegisterAccountUseCaseImpl(get(), get(), get()) }
   factory<LoginUseCase> { LoginUseCaseImpl(get(), get()) }
+  factory<RegisterAccountUseCase> { RegisterAccountUseCaseImpl(get(), get(), get()) }
 }
+

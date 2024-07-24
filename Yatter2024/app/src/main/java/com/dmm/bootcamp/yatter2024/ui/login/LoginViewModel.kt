@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.dmm.bootcamp.yatter2024.common.navigation.Destination
 import com.dmm.bootcamp.yatter2024.domain.model.Password
 import com.dmm.bootcamp.yatter2024.domain.model.Username
+import com.dmm.bootcamp.yatter2024.ui.register.RegisterDestination
 import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineDestination
 import com.dmm.bootcamp.yatter2024.usecase.login.LoginUseCase
 import com.dmm.bootcamp.yatter2024.usecase.login.LoginUseCaseResult
@@ -70,6 +71,13 @@ class LoginViewModel(
                 is LoginUseCaseResult.Failure -> {
                     // 4
                     // エラー表⽰
+                    val errorMessage = when (result) {
+                        is LoginUseCaseResult.Failure.EmptyUsername -> "ユーザー名が空です。"
+                        is LoginUseCaseResult.Failure.EmptyPassword -> "パスワードが空です。"
+                        is LoginUseCaseResult.Failure.InvalidPassword -> "無効なパスワードです。"
+                        is LoginUseCaseResult.Failure.OtherError -> "その他のエラー: ${result.throwable.message}"
+                    }
+                    _uiState.update { it.copy(errorMessage = errorMessage) }
                 }
             }
             _uiState.update { it.copy(isLoading = false) } // 5
@@ -78,7 +86,7 @@ class LoginViewModel(
 
 
     fun onClickRegister() {
-        // _destination.value = RegisterAccountDestination()
+        _destination.value = RegisterDestination()
     }
 
     fun onCompleteNavigation() {
