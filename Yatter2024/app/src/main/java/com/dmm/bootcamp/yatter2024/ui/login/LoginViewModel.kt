@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.dmm.bootcamp.yatter2024.common.navigation.Destination
 import com.dmm.bootcamp.yatter2024.domain.model.Password
 import com.dmm.bootcamp.yatter2024.domain.model.Username
+import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineDestination
 import com.dmm.bootcamp.yatter2024.usecase.login.LoginUseCase
 import com.dmm.bootcamp.yatter2024.usecase.login.LoginUseCaseResult
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -64,12 +65,18 @@ class LoginViewModel(
                 is LoginUseCaseResult.Success -> {
                     // 3
                     // パブリックタイムライン画面に遷移する処理の追加
+                    _destination.value = PublicTimelineDestination{
+                        popUpTo(LoginDestination().route) {
+                            inclusive = true
+                        }
+                    }
                 }
 
                 is LoginUseCaseResult.Failure -> {
                     // 4
                     // エラー表示
                 }
+
             }
 
             _uiState.update { it.copy(isLoading = false) } // 5
@@ -81,5 +88,7 @@ class LoginViewModel(
         // _destination.value = RegisterAccountDestination()
     }
 
-    fun onCompleteNavigation() {}
+    fun onCompleteNavigation() {
+        _destination.value = null
+    }
 }
