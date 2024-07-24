@@ -19,5 +19,4 @@ internal val domainImplModule = module {
   factory<GetMeService> { GetMeServiceImpl(get()) }
   factory<LoginService> { LoginServiceImpl(get(), get()) }
   factory<CheckLoginService> { CheckLoginServiceImpl(get()) }
-  factory<CheckLoginService> { CheckLoginServiceImpl(get()) }
 }
