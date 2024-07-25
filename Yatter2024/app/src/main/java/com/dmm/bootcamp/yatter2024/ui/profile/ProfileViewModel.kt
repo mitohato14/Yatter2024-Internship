@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.KoinApplication.Companion.init
 
 class ProfileViewModel(
     private val accountRepository: AccountRepository,
@@ -29,6 +30,10 @@ class ProfileViewModel(
     val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
     private val _destination = MutableStateFlow<Destination?>(null)
     val destination: StateFlow<Destination?> = _destination.asStateFlow()
+    companion object {
+        const val EGG_IMG = "https://pbs.twimg.com/media/C8UHG9pUMAAoatJ.jpg"
+        const val GREY_IMG = "https://cottoitalia.com/wp-content/uploads/2019/12/grey-brush-2.jpg"
+    }
     init{
         viewModelScope.launch {
             val account = accountRepository.findByUsername(Username(username))
@@ -39,6 +44,9 @@ class ProfileViewModel(
                         numFollow = account?.followingCount,
                         numFollower = account?.followerCount,
                         numPost = statusRepository.findStatusByUsername(username).size,
+                        avatar = account?.avatar?.toString() ?: EGG_IMG,
+                        header = account?.header?.toString() ?: GREY_IMG,
+                        id = account?.id?.value,
                     )
                 )
             }

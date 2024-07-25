@@ -1,13 +1,16 @@
 package com.dmm.bootcamp.yatter2024.ui.profile
 
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
@@ -30,15 +33,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.Key.Companion.F
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.res.ResourcesCompat
+import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
+import coil.request.ImageRequest
+import com.dmm.bootcamp.yatter2024.R
 import com.dmm.bootcamp.yatter2024.domain.model.Status
 import com.dmm.bootcamp.yatter2024.domain.model.Username
 import com.dmm.bootcamp.yatter2024.domain.repository.AccountRepository
 import com.dmm.bootcamp.yatter2024.domain.repository.StatusRepository
 import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.StatusBindingModel
 import com.dmm.bootcamp.yatter2024.ui.theme.Yatter2024Theme
+import java.net.URL
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -90,12 +102,29 @@ fun ProfileTemplate(
             Column(
                 modifier = Modifier.fillMaxWidth(),
             ){
-                // Header
+                val context = LocalContext.current
+                AsyncImage(
+                    modifier =Modifier.fillMaxWidth().height(80.dp),
+                    model = ImageRequest.Builder(context)
+                        .data(profileBindingModel.header)
+                        .setHeader("User-Agent","Mozilla/5.0")
+                        .build(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                )
                 Row{
-                    //Icon
+                    AsyncImage(
+                        modifier =Modifier.size(48.dp),
+                        model = ImageRequest.Builder(context)
+                            .data(profileBindingModel.avatar)
+                            .setHeader("User-Agent","Mozilla/5.0")
+                            .build(),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                    )
                     Column{
                         Text(profileBindingModel.username)
-                        Text("id") // idを入れたい．Identifier→String
+                        Text(profileBindingModel.id ?: "none_id") // idを入れたい．Identifier→String
                     }
                 }
                 // bio
@@ -140,6 +169,9 @@ private fun ProfileTemplatePreview() {
                     numPost = 100,
                     numFollower = 101,
                     numFollow = 17,
+                    id = "none_id",
+                    avatar = "https://appstars.jp/wp-content/uploads/2020/05/egg_step_1.png",
+                    header = "https://cottoitalia.com/wp-content/uploads/2019/12/grey-brush-2.jpg",
                 ),
                 statusList = listOf(
                     StatusBindingModel(
