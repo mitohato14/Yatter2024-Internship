@@ -1,5 +1,6 @@
 package com.dmm.bootcamp.yatter2024.infra.api
 
+import com.dmm.bootcamp.yatter2024.domain.model.AccountId
 import com.dmm.bootcamp.yatter2024.infra.api.json.AccountJson
 import com.dmm.bootcamp.yatter2024.infra.api.json.CreateAccountJson
 import com.dmm.bootcamp.yatter2024.infra.api.json.LoginRequestBodyJson
@@ -19,10 +20,14 @@ interface YatterApi {
   suspend fun login(
     @Body requestBody: LoginRequestBodyJson,
   ): LoginResponseJson
-  @POST("auth/register")
-  suspend fun register(
-    @Body requestBody: CreateAccountJson,
-  ): CreateAccountJson
+  @GET("timelines/{username}")
+  suspend fun getStatusByUsername(
+    @Path("username") username: String,
+    @Query("only_media") onlyMedia: Boolean = false,
+    @Query("max_id") maxId: String? = null,
+    @Query("since_id") sinceId: String? = null,
+    @Query("limit") limit: Int = 80
+  ): List<StatusJson>
   @GET("timelines/home")
   suspend fun getHomeTimeline(
     @Header("Authentication") token: String,

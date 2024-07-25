@@ -4,6 +4,9 @@ import com.dmm.bootcamp.yatter2024.domain.model.Status
 import com.dmm.bootcamp.yatter2024.domain.model.StatusId
 import com.dmm.bootcamp.yatter2024.domain.repository.StatusRepository
 import com.dmm.bootcamp.yatter2024.auth.TokenProvider
+import com.dmm.bootcamp.yatter2024.domain.model.AccountId
+import com.dmm.bootcamp.yatter2024.domain.model.Username
+import com.dmm.bootcamp.yatter2024.domain.repository.AccountRepository
 import com.dmm.bootcamp.yatter2024.infra.api.YatterApi
 import com.dmm.bootcamp.yatter2024.infra.api.json.PostStatusJson
 import com.dmm.bootcamp.yatter2024.infra.domain.converter.StatusConverter
@@ -14,6 +17,7 @@ import java.io.File
 class StatusRepositoryImpl(
   private val yatterApi: YatterApi,
   private val tokenProvider: TokenProvider,
+  private val accountRepository: AccountRepository,
 ) : StatusRepository {
   override suspend fun findById(id: StatusId): Status? {
     TODO("Not yet implemented")
@@ -27,6 +31,14 @@ class StatusRepositoryImpl(
   override suspend fun findAllHome(): List<Status> = withContext(IO) {
     val statusList = yatterApi.getHomeTimeline(tokenProvider.provide())
     StatusConverter.convertToDomainModel(statusList)
+  }
+
+  override suspend fun findStatusByUsername(username: String): List<Status> = withContext(IO){
+    val allStatusList = findAllPublic()
+    val statusList = allStatusList.filter{
+      it.account.username == Username(username)
+    }
+    statusList
   }
 
   override suspend fun create(

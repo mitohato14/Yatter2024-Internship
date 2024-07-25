@@ -1,5 +1,6 @@
 package com.dmm.bootcamp.yatter2024.domain.repository
 
+import com.dmm.bootcamp.yatter2024.domain.model.AccountId
 import com.dmm.bootcamp.yatter2024.domain.model.Status
 import com.dmm.bootcamp.yatter2024.domain.model.StatusId
 import java.io.File
@@ -10,6 +11,7 @@ interface StatusRepository {
   suspend fun findAllPublic(): List<Status>
 
   suspend fun findAllHome(): List<Status>
+  suspend fun findStatusByUsername(username:String): List<Status>
 
   suspend fun create(
     content: String,
