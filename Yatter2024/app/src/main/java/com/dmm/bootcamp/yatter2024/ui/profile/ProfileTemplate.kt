@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
@@ -64,6 +65,7 @@ fun ProfileTemplate(
     onClickLogout: () -> Unit,
     onClickFollow: () -> Unit,
     onClickFollower: () -> Unit,
+    onCliCkSetting: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -126,6 +128,11 @@ fun ProfileTemplate(
                         Text(profileBindingModel.username)
                         Text(profileBindingModel.id ?: "none_id") // idを入れたい．Identifier→String
                     }
+                    if(profileBindingModel.username == profileBindingModel.myname){
+                        Button(onClick = onCliCkSetting){
+                            Text("Edit")
+                        }
+                    }
                 }
                 // bio
                 Row{
@@ -158,47 +165,3 @@ fun ProfileTemplate(
     }
 }
 
-@Preview
-@Composable
-private fun ProfileTemplatePreview() {
-    Yatter2024Theme {
-        Surface {
-            ProfileTemplate(
-                profileBindingModel = ProfileBindingModel(
-                    username = "User",
-                    numPost = 100,
-                    numFollower = 101,
-                    numFollow = 17,
-                    id = "none_id",
-                    avatar = "https://appstars.jp/wp-content/uploads/2020/05/egg_step_1.png",
-                    header = "https://cottoitalia.com/wp-content/uploads/2019/12/grey-brush-2.jpg",
-                ),
-                statusList = listOf(
-                    StatusBindingModel(
-                        id = "id1",
-                        displayName = "display name1",
-                        username = "username1",
-                        avatar = null,
-                        content = "preview content1",
-                        attachmentMediaList = listOf()
-                    ),
-                    StatusBindingModel(
-                        id = "id1",
-                        displayName = "display name1",
-                        username = "username1",
-                        avatar = null,
-                        content = "preview content2",
-                        attachmentMediaList = listOf()
-                    ),
-                ),
-                isLoading = false,
-                isRefreshing = false,
-                onRefresh = {},
-                onClickPost = {},
-                onClickLogout = {},
-                onClickFollow = {},
-                onClickFollower = {},
-            )
-        }
-    }
-}

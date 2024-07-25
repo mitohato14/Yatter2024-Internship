@@ -7,11 +7,13 @@ import com.dmm.bootcamp.yatter2024.common.navigation.Destination
 import com.dmm.bootcamp.yatter2024.domain.model.Username
 import com.dmm.bootcamp.yatter2024.domain.repository.AccountRepository
 import com.dmm.bootcamp.yatter2024.domain.repository.StatusRepository
+import com.dmm.bootcamp.yatter2024.domain.service.GetMeService
 import com.dmm.bootcamp.yatter2024.infra.pref.TokenPreferences
 import com.dmm.bootcamp.yatter2024.ui.login.LoginDestination
 import com.dmm.bootcamp.yatter2024.ui.post.PostDestination
 import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.StatusBindingModel
 import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.converter.StatusConverter
+import com.dmm.bootcamp.yatter2024.ui.setting.SettingDestination
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,6 +25,7 @@ class ProfileViewModel(
     private val accountRepository: AccountRepository,
     private val statusRepository: StatusRepository,
     private val tokenPreferences: TokenPreferences,
+    private val getMeService: GetMeService,
     val username: String = "",
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<ProfileUiState> =
@@ -37,9 +40,11 @@ class ProfileViewModel(
     init{
         viewModelScope.launch {
             val account = accountRepository.findByUsername(Username(username))
+            val me = getMeService.execute()
             _uiState.update {
                 it.copy(
                     profileBindingModel = ProfileBindingModel(
+                        myname = me?.username?.value,
                         username = username,
                         numFollow = account?.followingCount,
                         numFollower = account?.followerCount,
@@ -76,6 +81,9 @@ class ProfileViewModel(
     }
     fun onClickPost(){
         _destination.value = PostDestination()
+    }
+    fun onClickSetting(){
+        _destination.value = SettingDestination()
     }
     fun onClickLogout(){
         tokenPreferences.clear()

@@ -37,6 +37,7 @@ fun ProfilePage (
         onClickPost = viewModel::onClickPost,
         onClickLogout = viewModel::onClickLogout,
         onClickFollow = viewModel::onClickFollow,
-        onClickFollower = viewModel::onClickFollower
+        onClickFollower = viewModel::onClickFollower,
+        onCliCkSetting = viewModel::onClickSetting
     )
 }

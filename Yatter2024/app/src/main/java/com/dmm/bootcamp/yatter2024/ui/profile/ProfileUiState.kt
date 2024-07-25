@@ -15,6 +15,7 @@ data class ProfileUiState(
         fun empty(): ProfileUiState = ProfileUiState(
             statusList = emptyList(),
             profileBindingModel = ProfileBindingModel(
+                myname = null,
                 id = "",
                 username = "",
                 numPost = 0,

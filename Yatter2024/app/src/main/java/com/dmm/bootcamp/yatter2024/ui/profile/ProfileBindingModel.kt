@@ -6,6 +6,7 @@ import com.dmm.bootcamp.yatter2024.domain.model.Username
 import java.net.URL
 
 data class ProfileBindingModel(
+    val myname: String?,
     val username: String,
     val numPost : Int?,
     val numFollow : Int?,
