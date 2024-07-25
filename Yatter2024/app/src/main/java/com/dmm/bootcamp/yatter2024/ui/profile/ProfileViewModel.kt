@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel (
     private val statusRepository: StatusRepository,
+    private val getMeService: GetMeService,
     ) : ViewModel() {
     private val _uiState: MutableStateFlow<ProfileUiState> = MutableStateFlow(ProfileUiState.empty())
     val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
@@ -25,22 +26,26 @@ class ProfileViewModel (
     private val _destination = MutableStateFlow<Destination?>(null)
     val destination: StateFlow<Destination?> = _destination.asStateFlow()
 
-    /*
-    private suspend fun fetchProfile() {
-        val statusList = statusRepository.findAllHome()// パブリックタイムラインとは異なりここをfindAllHomeを使うことで自分のstatusのみをfetchしたい
-        //val statusBindingModel = statusList.firstOrNull()
-        _uiState.update {
-            it.copy(
-                statusList = StatusConverter.convertToBindingModel(statusList), // 2
-            )
+    fun onCreate() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true) }
+            val me = getMeService.execute()
         }
     }
-     */
+
+   private suspend fun fetchMyTimeline() {
+    val statusList = statusRepository.findAllPublic() // 1
+    _uiState.update {
+      it.copy(
+        statusList = StatusConverter.convertToBindingModel(statusList), // 2
+      )
+    }
+  }
 
     fun onResume() {
         viewModelScope.launch { // 1
             _uiState.update { it.copy(isLoading = true) } // 2
-            //fetchProfile() // 3
+            fetchMyTimeline() // 3
             _uiState.update { it.copy(isLoading = false) } // 4
         }
     }
@@ -48,7 +53,7 @@ class ProfileViewModel (
     fun onRefresh() {
         viewModelScope.launch { // 1
             _uiState.update { it.copy(isRefreshing = true) } // 2
-            //fetchProfile() // 3
+            fetchMyTimeline() // 3
             _uiState.update { it.copy(isRefreshing = false) } // 4
         }
     }

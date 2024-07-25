@@ -24,6 +24,10 @@ fun ProfilePage(
         viewModel.onCompleteNavigation()
     }
 
+    LifecycleEventEffect(event = Lifecycle.Event.ON_CREATE) {
+        viewModel.onCreate()
+    }
+
     LifecycleEventEffect(event = Lifecycle.Event.ON_RESUME) {
         viewModel.onResume()
     }
