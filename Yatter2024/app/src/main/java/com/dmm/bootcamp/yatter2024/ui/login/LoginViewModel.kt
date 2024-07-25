@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.dmm.bootcamp.yatter2024.common.navigation.Destination
 import com.dmm.bootcamp.yatter2024.domain.model.Password
 import com.dmm.bootcamp.yatter2024.domain.model.Username
+import com.dmm.bootcamp.yatter2024.ui.register.RegisterDestination
 import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineDestination
 import com.dmm.bootcamp.yatter2024.usecase.login.LoginUseCase
 import com.dmm.bootcamp.yatter2024.usecase.login.LoginUseCaseResult
@@ -84,8 +85,8 @@ class LoginViewModel(
     }
 
     //会員登録へ進むためのボタンをユーザーが押下したときに呼び出すメソッド。会員登録ボタンは会員登録画面への遷移を実装。
-    fun onClickRegister() {
-        // _destination.value = RegisterAccountDestination()
+    fun onClickToRegister() {
+        _destination.value = RegisterDestination()
     }
 
     fun onCompleteNavigation() {

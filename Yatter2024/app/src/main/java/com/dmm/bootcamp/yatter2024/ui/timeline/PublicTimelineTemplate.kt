@@ -1,5 +1,8 @@
 package com.dmm.bootcamp.yatter2024.ui.timeline
 
+import androidx.compose.foundation.hoverable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,8 +33,11 @@ import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode.Companion.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dmm.bootcamp.yatter2024.ui.theme.Yatter2024Theme
@@ -48,6 +54,7 @@ fun PublicTimelineTemplate(
     onClickProfile: () -> Unit,
     onClickHome: () -> Unit,
 ) {
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -72,7 +79,9 @@ fun PublicTimelineTemplate(
                         .padding(16.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    IconButton(onClick =  onClickHome ) {
+                    IconButton(
+                        onClick =  onClickHome,
+                        ) {
                         Icon(
                             imageVector = Icons.Default.Home,
                             contentDescription = "home"

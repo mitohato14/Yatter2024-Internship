@@ -1,4 +1,4 @@
-package com.dmm.bootcamp.yatter2024.ui.login
+package com.dmm.bootcamp.yatter2024.ui.register
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,27 +17,29 @@ import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.dmm.bootcamp.yatter2024.ui.theme.Yatter2024Theme
 
 @Composable
-fun LoginTemplate(
+fun RegisterTemplate(
     userName: String,
     onChangedUserName: (String) -> Unit,
     password: String,
     onChangedPassword: (String) -> Unit,
-    isEnableLogin: Boolean,
+    isEnableRegister: Boolean,
+    onClickRegister: () -> Unit,
     isLoading: Boolean,
-    onClickLogin: () -> Unit,
-    onClickToRegister: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "ログイン")
+                    Text(text = "新規会員登録")
                 }
             )
         }
@@ -74,34 +76,27 @@ fun LoginTemplate(
                 OutlinedTextField(
                     singleLine = true,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 16.dp),
+                        .fillMaxWidth(),
                     value = password,
                     onValueChange = onChangedPassword,
                     placeholder = {
                         Text(text = "password")
                     },
                 )
+                Text(
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(bottom = 16.dp),
+                    text = "パスワードは英数字８文字以上、必ず大文字小文字記号を含むこと",
+                    style = TextStyle(
+                        fontSize = 12.sp, // フォントサイズを小さくする
+                        color = Color.Gray // フォントカラーをグレーにする
+                    )
+                )
                 Button(
-                    enabled = isEnableLogin,
-                    onClick = onClickLogin,
+                    enabled = isEnableRegister,
+                    onClick = onClickRegister,
                     modifier = Modifier
                         .fillMaxWidth(),
-                ) {
-                    Text(text = "ログイン")
-                }
-
-                Divider(modifier = Modifier.padding(vertical = 16.dp))
-
-                Text(
-                    text = "はじめてご利用の方は",
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.body2
-                )
-                TextButton(
-                    onClick = onClickToRegister,
-                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(text = "新規会員登録")
                 }
@@ -115,18 +110,17 @@ fun LoginTemplate(
 
 @Preview
 @Composable
-private fun LoginTemplatePreview() {
+private fun RegisterTemplatePreview() {
     Yatter2024Theme {
         Surface() {
-            LoginTemplate(
+            RegisterTemplate(
                 userName = "username",
                 onChangedUserName = {},
                 password = "password",
                 onChangedPassword = {},
-                isEnableLogin = true,
+                isEnableRegister = true,
+                onClickRegister = {},
                 isLoading = false,
-                onClickLogin = {},
-                onClickToRegister = {},
             )
         }
     }
