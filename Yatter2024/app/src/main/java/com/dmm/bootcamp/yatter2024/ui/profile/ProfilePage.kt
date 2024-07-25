@@ -9,6 +9,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dmm.bootcamp.yatter2024.ui.LocalNavController
 import com.dmm.bootcamp.yatter2024.ui.profile.ProfileTemplate
 import com.dmm.bootcamp.yatter2024.ui.profile.ProfileViewModel
+import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineTemplate
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -22,10 +23,15 @@ fun ProfilePage(
         destination?.navigate(navController)
         viewModel.onCompleteNavigation()
     }
-    LifecycleEventEffect(event = Lifecycle.Event.ON_CREATE) {
-        viewModel.onCreate()
-    }
-    ProfileTemplate(
 
+    LifecycleEventEffect(event = Lifecycle.Event.ON_RESUME) {
+        viewModel.onResume()
+    }
+
+    ProfileTemplate(
+        statusList = uiState.statusList,
+        isLoading = uiState.isLoading,
+        isRefreshing = uiState.isRefreshing,
+        onRefresh = viewModel::onRefresh,
     )
 }

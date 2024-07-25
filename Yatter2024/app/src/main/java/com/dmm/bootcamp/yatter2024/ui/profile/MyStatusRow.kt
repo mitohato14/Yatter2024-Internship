@@ -30,10 +30,10 @@ import androidx.core.content.res.ResourcesCompat
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.dmm.bootcamp.yatter2024.R
+import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.MediaBindingModel
+import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.StatusBindingModel
 import com.dmm.bootcamp.yatter2024.ui.theme.Yatter2024Theme
-import com.dmm.bootcamp.yatter2024.ui.timeline.StatusRow
-import com.dmm.bootcamp.yatter2024.ui.timeline.bindingmodel.MediaBindingModel
-import com.dmm.bootcamp.yatter2024.ui.timeline.bindingmodel.StatusBindingModel
+
 
 @Composable
 fun MyStatusRow(
@@ -94,7 +94,8 @@ fun MyStatusRow(
                     // データ1件あたりに表示したいコンポーザブルを呼び出す
                     AsyncImage(
                         model = attachmentMedia.url,
-                        contentDescription = attachmentMedia.description
+                        contentDescription = attachmentMedia.description,
+                        modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                 }
