@@ -25,7 +25,9 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
@@ -61,6 +63,7 @@ import com.dmm.bootcamp.yatter2024.ui.theme.Yatter2024Theme
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ProfileTemplate(
+
     statusList: List<StatusBindingModel>,
     isLoading: Boolean,
     isRefreshing: Boolean,
@@ -82,8 +85,21 @@ fun ProfileTemplate(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "プロフィール")
+                    Row {
+                        Text(text = "プロフィール")
+                        Spacer(modifier = Modifier.weight(1f))
+
+                        //IconButton(onClick = /*ToDo*/) {
+                        Icon(
+                            imageVector = Icons.Default.Create,
+                            contentDescription = "プロフィールの編集",
+                            modifier = Modifier.padding(end = 16.dp),
+                        )
+                        //}
+                    }
+
                 }
+
             )
         },
         bottomBar = {
@@ -149,6 +165,7 @@ fun ProfileTemplate(
                     modifier = Modifier.size(120.dp)
                 )
                  */
+
                 /*
                 AsyncImage(
                     modifier = Modifier.size(120.dp),
@@ -163,7 +180,6 @@ fun ProfileTemplate(
                     contentDescription = stringResource(id = R.string.public_timeline_avatar_content_description),
                     contentScale = ContentScale.Crop,
                 )
-
                  */
                 /*
                 Text(
@@ -177,16 +193,21 @@ fun ProfileTemplate(
                 )
                  */
 
+                /*
                 Text(
                     text = buildAnnotatedString {
                         // appendで文字列セット
-                        //append(Me.displayName)
+                        append(Me.displayName)
                     },
                     maxLines = 1, // 文字列が複数行にならないように指定
                     overflow = TextOverflow.Ellipsis, // はみ出した分を「...」で表現
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.h6.copy(fontSize = 36.sp)// 文字を太字に
                 )
+
+                 */
+                /*
+
                 Text(
                     text = buildAnnotatedString {
                         withStyle(
@@ -195,13 +216,15 @@ fun ProfileTemplate(
                                 color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                             )
                         ) {
-                            //append(" @${Me.username}")
+                            append(" @${Me.username}")
                         }
                     },
                     maxLines = 1, // 文字列が複数行にならないように指定
                     overflow = TextOverflow.Ellipsis, // はみ出した分を「...」で表現
                     fontWeight = FontWeight.Bold, // 文字を太字に
                 )
+
+                 */
 
                 Text(
                     modifier = Modifier.fillMaxWidth().padding(top = 12.dp),

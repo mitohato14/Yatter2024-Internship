@@ -74,6 +74,7 @@ dependencies {
   implementation(libs.koin.androidx.compose)
   implementation(libs.coil.compose)
   implementation(libs.androidx.core.splashscreen)
+  implementation(libs.androidx.datastore)
 
   testImplementation(libs.junit)
   testImplementation(libs.mockk)
