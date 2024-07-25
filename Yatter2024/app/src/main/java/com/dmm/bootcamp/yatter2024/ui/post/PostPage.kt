@@ -30,5 +30,7 @@ fun PostPage(
         onStatusTextChanged = viewModel::onChangedStatusText,
         onClickPost = viewModel::onClickPost,
         onClickNavIcon = viewModel::onClickNavIcon,
+        onClickHome = viewModel::onClickHome,
+        onClickProfile = viewModel::onClickProfile,
     )
 }

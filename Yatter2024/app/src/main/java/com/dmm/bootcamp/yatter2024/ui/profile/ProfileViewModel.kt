@@ -7,6 +7,7 @@ import com.dmm.bootcamp.yatter2024.domain.repository.StatusRepository
 import com.dmm.bootcamp.yatter2024.domain.service.GetMeService
 import com.dmm.bootcamp.yatter2024.ui.post.PostUiState
 import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.converter.StatusConverter
+import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineDestination
 import com.dmm.bootcamp.yatter2024.usecase.post.PostStatusUseCase
 import com.dmm.bootcamp.yatter2024.usecase.profile.ProfileStatusUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -52,7 +53,13 @@ class ProfileViewModel (
         }
     }
 
-    fun onClickNavIcon() {}
+    fun onClickHome() {
+        _destination.value = PublicTimelineDestination()
+    }
+
+    fun onClickProfile() {
+        _destination.value = ProfileDestination()
+    }
 
     fun onCompleteNavigation() {
         _destination.value = null

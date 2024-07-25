@@ -31,6 +31,10 @@ class PublicTimelineViewModel(
         }
     }
 
+    fun onClickHome() {
+        _destination.value = PublicTimelineDestination()
+    }
+
     fun onClickProfile(){
         _destination.value = ProfileDestination()
     }

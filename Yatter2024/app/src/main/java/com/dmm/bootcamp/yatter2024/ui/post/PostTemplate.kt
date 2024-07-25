@@ -1,5 +1,6 @@
 package com.dmm.bootcamp.yatter2024.ui.post
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
@@ -19,6 +21,11 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,6 +52,8 @@ fun PostTemplate(
     onStatusTextChanged: (String) -> Unit,
     onClickPost: () -> Unit,
     onClickNavIcon: () -> Unit,
+    onClickProfile: () -> Unit,
+    onClickHome: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -61,6 +70,47 @@ fun PostTemplate(
                     }
                 }
             )
+        },
+        bottomBar = {
+            BottomAppBar {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    IconButton(onClick =  onClickHome ) {
+                        Icon(
+                            imageVector = Icons.Default.Home,
+                            contentDescription = "home"
+                        )
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "search"
+                        )
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Notifications,
+                            contentDescription = "notification"
+                        )
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Email,
+                            contentDescription = "email"
+                        )
+                    }
+                    IconButton(onClick =  onClickProfile) {
+                        Icon(
+                            imageVector = Icons.Default.AccountCircle,
+                            contentDescription = "accountcircle"
+                        )
+                    }
+                }
+            }
         }
     ) {
         Box(
@@ -136,6 +186,8 @@ private fun PostTemplatePreview() {
                 onStatusTextChanged = {},
                 onClickPost = {},
                 onClickNavIcon = {},
+                onClickHome = {},
+                onClickProfile = {}
             )
         }
     }

@@ -1,8 +1,10 @@
 package com.dmm.bootcamp.yatter2024.ui.profile
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,14 +13,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.BottomAppBar
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -54,6 +65,8 @@ fun ProfileTemplate(
     isLoading: Boolean,
     isRefreshing: Boolean,
     onRefresh: () -> Unit,
+    onClickProfile: () -> Unit,
+    onClickHome: () -> Unit,
 ) {
     val pullRefreshState = rememberPullRefreshState(isRefreshing, onRefresh)
     val context = LocalContext.current
@@ -73,7 +86,47 @@ fun ProfileTemplate(
                 }
             )
         },
-        //ここにパブリックタイムラインに作ったボトムバーを持ってくる
+        bottomBar = {
+            BottomAppBar {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    IconButton(onClick =  onClickHome ) {
+                        Icon(
+                            imageVector = Icons.Default.Home,
+                            contentDescription = "home"
+                        )
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "search"
+                        )
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Notifications,
+                            contentDescription = "notification"
+                        )
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(
+                            imageVector = Icons.Default.Email,
+                            contentDescription = "email"
+                        )
+                    }
+                    IconButton(onClick =  onClickProfile ) {
+                        Icon(
+                            imageVector = Icons.Default.AccountCircle,
+                            contentDescription = "accountcircle"
+                        )
+                    }
+                }
+            }
+        }
     ) {
         Box(
             modifier = Modifier
@@ -213,7 +266,9 @@ private fun ProfileTemplatePreview() {
                 ),
                 isLoading = true,
                 isRefreshing = false,
-                onRefresh = {}
+                onRefresh = {},
+                onClickProfile = {},
+                onClickHome = {},
             )
         }
     }

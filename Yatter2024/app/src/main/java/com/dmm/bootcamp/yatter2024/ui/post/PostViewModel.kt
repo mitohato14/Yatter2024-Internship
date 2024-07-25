@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.dmm.bootcamp.yatter2024.common.navigation.Destination
 import com.dmm.bootcamp.yatter2024.common.navigation.PopBackDestination
 import com.dmm.bootcamp.yatter2024.domain.service.GetMeService
+import com.dmm.bootcamp.yatter2024.ui.profile.ProfileDestination
+import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineDestination
 import com.dmm.bootcamp.yatter2024.usecase.post.PostStatusUseCase
 import com.dmm.bootcamp.yatter2024.usecase.post.PostStatusUseCaseResult
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,6 +14,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
 class PostViewModel(
     private val postStatusUseCase: PostStatusUseCase,
@@ -41,6 +44,14 @@ class PostViewModel(
 
     fun onChangedStatusText(statusText: String) {
         _uiState.update { it.copy(bindingModel = uiState.value.bindingModel.copy(statusText = statusText)) }
+    }
+
+    fun onClickHome(){
+        _destination.value = PublicTimelineDestination()
+    }
+
+    fun onClickProfile(){
+        _destination.value = ProfileDestination()
     }
 
     fun onClickPost() {

@@ -46,6 +46,7 @@ fun PublicTimelineTemplate(
     onRefresh: () -> Unit,
     onClickPost: () -> Unit,
     onClickProfile: () -> Unit,
+    onClickHome: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -71,7 +72,7 @@ fun PublicTimelineTemplate(
                         .padding(16.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick =  onClickHome ) {
                         Icon(
                             imageVector = Icons.Default.Home,
                             contentDescription = "home"
@@ -151,8 +152,7 @@ private fun PublicTimelineTemplatePreview() {
                     ),
                     StatusBindingModel(
                         id = "id2",
-                        displayName = "displa" +
-                                "y name2",
+                        displayName = "display name2",
                         username = "username2",
                         avatar = null,
                         content = "preview content2",
@@ -164,6 +164,7 @@ private fun PublicTimelineTemplatePreview() {
                 onRefresh = {},
                 onClickPost = {},
                 onClickProfile = {},
+                onClickHome = {},
             )
         }
     }
