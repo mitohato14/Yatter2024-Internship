@@ -33,5 +33,7 @@ fun ProfilePage(
         isLoading = uiState.isLoading,
         isRefreshing = uiState.isRefreshing,
         onRefresh = viewModel::onRefresh,
+        onClickProfile = viewModel::onClickProfile,
+        onClickHome = viewModel::onClickHome,
     )
 }

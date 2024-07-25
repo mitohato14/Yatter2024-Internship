@@ -34,5 +34,6 @@ fun PublicTimelinePage(
         onRefresh = viewModel::onRefresh,
         onClickPost = viewModel::onClickPost,
         onClickProfile = viewModel::onClickProfile,
+        onClickHome = viewModel::onClickHome,
     )
 }
