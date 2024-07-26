@@ -13,11 +13,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class RegisterViewModel (
+class RegisterAccountViewModel (
     private val registerAccountUseCase: RegisterAccountUseCase,
 ) : ViewModel() {
     private val _uiState: MutableStateFlow<RegisterUiState> = MutableStateFlow(RegisterUiState.empty())
-    val uiState: StateFlow<RegisterUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<RegisterUiState> = _uiState
 
     private val _destination = MutableStateFlow<Destination?>(null)
     val destination: StateFlow<Destination?> = _destination.asStateFlow()
@@ -36,7 +36,7 @@ class RegisterViewModel (
                     }
                 }
                 is RegisterAccountUseCaseResult.Failure -> {
-                    // エラー表示
+                    println(result)
                 }
             }
             _uiState.update { it.copy(isLoading = false) }

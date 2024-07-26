@@ -1,4 +1,4 @@
-package com.dmm.bootcamp.yatter2024
+package com.dmm.bootcamp.yatter2024.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

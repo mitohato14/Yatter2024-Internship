@@ -1,4 +1,4 @@
-package com.dmm.bootcamp.yatter2024.register
+package com.dmm.bootcamp.yatter2024.ui.register
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box

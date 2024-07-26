@@ -14,6 +14,7 @@ import org.koin.core.context.startKoin
 
 class YatterApplication : Application(), ImageLoaderFactory {
   override fun onCreate() {
+
     super.onCreate()
 
     startKoin {

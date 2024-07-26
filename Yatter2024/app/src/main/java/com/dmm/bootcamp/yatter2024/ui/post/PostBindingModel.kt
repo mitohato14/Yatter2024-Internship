@@ -1,4 +1,6 @@
 package com.dmm.bootcamp.yatter2024.ui.post
 
-class PostBindingModel {
-}
+data class PostBindingModel(
+    val avatarUrl: String?,
+    val statusText: String,
+)
