@@ -35,6 +35,7 @@ fun PublicTimelineTemplate(
     isRefreshing: Boolean,
     onRefresh: () -> Unit,
     onClickPost: () -> Unit,
+    onStatusAvatarClick: (String) -> Unit
 ) {
     val pullRefreshState = rememberPullRefreshState(isRefreshing, onRefresh)
 
@@ -67,7 +68,10 @@ fun PublicTimelineTemplate(
                 contentPadding = PaddingValues(8.dp),
             ) {
                 items(statusList) { item ->
-                    StatusRow(statusBindingModel = item)
+                    StatusRow(
+                        statusBindingModel = item,
+                        onClickAvatar =  onStatusAvatarClick
+                    )
                 }
             }
             PullRefreshIndicator(
@@ -111,6 +115,7 @@ private fun PublicTimelineTemplatePreview() {
                 isRefreshing = false,
                 onRefresh = {},
                 onClickPost = {},
+                onStatusAvatarClick = {},
             )
         }
     }
