@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.dmm.bootcamp.yatter2024.common.navigation.Destination
 import com.dmm.bootcamp.yatter2024.domain.repository.StatusRepository
 import com.dmm.bootcamp.yatter2024.domain.service.GetMeService
+import com.dmm.bootcamp.yatter2024.ui.edit.EditDestination
 import com.dmm.bootcamp.yatter2024.ui.post.PostUiState
 import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.converter.StatusConverter
 import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineDestination
@@ -76,7 +77,12 @@ class ProfileViewModel (
         _destination.value = ProfileDestination()
     }
 
+    fun onClickEdit() {
+        _destination.value = EditDestination()
+    }
+
     fun onCompleteNavigation() {
         _destination.value = null
     }
+
     }

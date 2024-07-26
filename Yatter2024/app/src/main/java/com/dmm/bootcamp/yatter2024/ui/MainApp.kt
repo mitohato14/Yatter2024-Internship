@@ -9,6 +9,7 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.dmm.bootcamp.yatter2024.ui.edit.EditDestination
 import com.dmm.bootcamp.yatter2024.ui.login.LoginDestination
 import com.dmm.bootcamp.yatter2024.ui.post.PostDestination
 import com.dmm.bootcamp.yatter2024.ui.profile.ProfileDestination
@@ -44,6 +45,7 @@ fun MainApp(
                 PostDestination.createNode(this)
                 ProfileDestination.createNode(this)
                 RegisterDestination.createNode(this)
+                EditDestination.createNode(this)
             }
         }
     }
