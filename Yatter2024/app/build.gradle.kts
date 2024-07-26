@@ -75,6 +75,7 @@ dependencies {
   implementation(libs.coil.compose)
   implementation(libs.androidx.core.splashscreen)
   implementation(libs.androidx.datastore)
+  implementation(libs.lottie.compose)
 
   testImplementation(libs.junit)
   testImplementation(libs.mockk)

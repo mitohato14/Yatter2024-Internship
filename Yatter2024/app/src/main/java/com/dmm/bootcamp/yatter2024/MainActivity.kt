@@ -4,11 +4,15 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.Surface
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.core.splashscreen.SplashScreen
 import com.dmm.bootcamp.yatter2024.ui.MainApp
-import com.dmm.bootcamp.yatter2024.ui.login.LoginPage
-import com.dmm.bootcamp.yatter2024.ui.profile.ProfilePage
+import com.dmm.bootcamp.yatter2024.ui.splash.SplashPage
+import com.dmm.bootcamp.yatter2024.ui.splash.SplashTemplate
+import com.dmm.bootcamp.yatter2024.ui.splash.SplashViewModel
 import com.dmm.bootcamp.yatter2024.ui.theme.Yatter2024Theme
-import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelinePage
+import org.koin.androidx.compose.getViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,9 +24,19 @@ class MainActivity : AppCompatActivity() {
           //PublicTimelinePage()
           //LoginPage()
           //ProfilePage()
-          MainApp()
+
+          //スプラッシュ画面を表示してからmainappに遷移するように
+          val splashViewModel: SplashViewModel = getViewModel()
+          val isSplashFinished by splashViewModel.isSplashFinished.collectAsState()
+
+          if (isSplashFinished) {
+            MainApp()
+          } else {
+            SplashPage()
+          }
+          }
         }
       }
     }
   }
-}
+
