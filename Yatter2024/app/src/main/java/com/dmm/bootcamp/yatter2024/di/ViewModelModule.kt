@@ -5,6 +5,7 @@ import com.dmm.bootcamp.yatter2024.ui.login.LoginViewModel
 import com.dmm.bootcamp.yatter2024.ui.post.PostViewModel
 import com.dmm.bootcamp.yatter2024.ui.profile.ProfileViewModel
 import com.dmm.bootcamp.yatter2024.ui.register.RegisterViewModel
+import com.dmm.bootcamp.yatter2024.ui.splash.SplashViewModel
 import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -17,4 +18,5 @@ internal val viewModelModule = module {
   viewModel { LoginViewModel(get()) }
   viewModel { MainViewModel(get()) }
   viewModel { ProfileViewModel(get(), get()) }
+  viewModel { SplashViewModel() }
 }
