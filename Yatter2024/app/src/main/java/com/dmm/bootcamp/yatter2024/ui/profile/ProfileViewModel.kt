@@ -29,7 +29,17 @@ class ProfileViewModel (
     fun onCreate() {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
+
             val me = getMeService.execute()
+
+            val snapshotBindingModel = uiState.value.statusBindingModel
+            _uiState.update {
+                it.copy(
+                    statusBindingModel = snapshotBindingModel.copy(username = me?.username?.value?: ""),
+                    isLoading = false,
+                )
+
+            }
         }
     }
 

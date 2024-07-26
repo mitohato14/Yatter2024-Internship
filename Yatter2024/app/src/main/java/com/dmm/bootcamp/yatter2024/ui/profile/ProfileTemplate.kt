@@ -55,15 +55,16 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.dmm.bootcamp.yatter2024.R
 import com.dmm.bootcamp.yatter2024.domain.model.Me
+import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.MediaBindingModel
 import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.StatusBindingModel
 import com.dmm.bootcamp.yatter2024.ui.theme.Yatter2024Theme
-
+import java.net.URL
 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ProfileTemplate(
-
+    statusBindingModel: StatusBindingModel,
     statusList: List<StatusBindingModel>,
     isLoading: Boolean,
     isRefreshing: Boolean,
@@ -166,12 +167,12 @@ fun ProfileTemplate(
                 )
                  */
 
-                /*
+
                 AsyncImage(
                     modifier = Modifier.size(120.dp),
                     // ImageRequestを作成して、画像取得できていない状態のプレイスホルダー設定
                     model = ImageRequest.Builder(context)
-                        .data(Me.avatar)
+                        .data(statusBindingModel.avatar)
                         .placeholder(placeholder)
                         .error(placeholder)
                         .fallback(placeholder)
@@ -180,7 +181,6 @@ fun ProfileTemplate(
                     contentDescription = stringResource(id = R.string.public_timeline_avatar_content_description),
                     contentScale = ContentScale.Crop,
                 )
-                 */
                 /*
                 Text(
                     modifier = Modifier
@@ -193,11 +193,10 @@ fun ProfileTemplate(
                 )
                  */
 
-                /*
                 Text(
                     text = buildAnnotatedString {
                         // appendで文字列セット
-                        append(Me.displayName)
+                        append(statusBindingModel.displayName)
                     },
                     maxLines = 1, // 文字列が複数行にならないように指定
                     overflow = TextOverflow.Ellipsis, // はみ出した分を「...」で表現
@@ -205,8 +204,6 @@ fun ProfileTemplate(
                     style = MaterialTheme.typography.h6.copy(fontSize = 36.sp)// 文字を太字に
                 )
 
-                 */
-                /*
 
                 Text(
                     text = buildAnnotatedString {
@@ -216,15 +213,13 @@ fun ProfileTemplate(
                                 color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
                             )
                         ) {
-                            append(" @${Me.username}")
+                            append(" @${statusBindingModel.username}")
                         }
                     },
                     maxLines = 1, // 文字列が複数行にならないように指定
                     overflow = TextOverflow.Ellipsis, // はみ出した分を「...」で表現
                     fontWeight = FontWeight.Bold, // 文字を太字に
                 )
-
-                 */
 
                 Text(
                     modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
@@ -269,6 +264,14 @@ private fun ProfileTemplatePreview() {
     Yatter2024Theme {
         Surface() {
             ProfileTemplate(
+                statusBindingModel = StatusBindingModel(
+                    id = "id",
+                    displayName = "displayName",
+                    username = "username",
+                    avatar = null,
+                    content = "preview content_default",
+                    attachmentMediaList = listOf()
+                ),
                 statusList = listOf(
                     StatusBindingModel(
                         id = "id1",
