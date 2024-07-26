@@ -1,4 +1,4 @@
-package com.dmm.bootcamp.yatter2024.ui.profile
+package com.dmm.bootcamp.yatter2024.ui.edit
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -8,13 +8,11 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dmm.bootcamp.yatter2024.ui.LocalNavController
 import com.dmm.bootcamp.yatter2024.ui.profile.ProfileTemplate
-import com.dmm.bootcamp.yatter2024.ui.profile.ProfileViewModel
-import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineTemplate
 import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun ProfilePage(
-    viewModel: ProfileViewModel = getViewModel(),
+fun EditPage(
+    viewModel: EditViewModel = getViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val destination by viewModel.destination.collectAsStateWithLifecycle()
@@ -24,22 +22,13 @@ fun ProfilePage(
         viewModel.onCompleteNavigation()
     }
 
-    LifecycleEventEffect(event = Lifecycle.Event.ON_CREATE) {
-        viewModel.onCreate()
-    }
-
-    LifecycleEventEffect(event = Lifecycle.Event.ON_RESUME) {
-        viewModel.onResume()
-    }
-
-    ProfileTemplate(
-        statusBindingModel = uiState.statusBindingModel,
-        statusList = uiState.statusList,
+    EditTemplate(
         isLoading = uiState.isLoading,
-        isRefreshing = uiState.isRefreshing,
-        onRefresh = viewModel::onRefresh,
+        userName = uiState.editBindingModel.username,
+        password = uiState.editBindingModel.password,
+        onChangedUserName = viewModel::onChangedUsername,
+        onChangedPassword = viewModel::onChangedPassword,
         onClickProfile = viewModel::onClickProfile,
         onClickHome = viewModel::onClickHome,
-        onClickEdit = viewModel::onClickEdit,
     )
 }

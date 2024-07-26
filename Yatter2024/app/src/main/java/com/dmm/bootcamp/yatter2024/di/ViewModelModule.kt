@@ -1,6 +1,7 @@
 package com.dmm.bootcamp.yatter2024.di
 
 import com.dmm.bootcamp.yatter2024.ui.MainViewModel
+import com.dmm.bootcamp.yatter2024.ui.edit.EditViewModel
 import com.dmm.bootcamp.yatter2024.ui.login.LoginViewModel
 import com.dmm.bootcamp.yatter2024.ui.post.PostViewModel
 import com.dmm.bootcamp.yatter2024.ui.profile.ProfileViewModel
@@ -18,5 +19,6 @@ internal val viewModelModule = module {
   viewModel { LoginViewModel(get()) }
   viewModel { MainViewModel(get()) }
   viewModel { ProfileViewModel(get(), get()) }
+  viewModel { EditViewModel(get()) }
   viewModel { SplashViewModel() }
 }

@@ -16,8 +16,11 @@ data class ProfileUiState(
                  id = "",
                  displayName = "",
                  username = "",
+                 note = "",
                  avatar = null,
                  content = "",
+                 followingCount = 0,
+                 followerCount = 0,
                  attachmentMediaList = emptyList()
             ),
             isLoading = false,

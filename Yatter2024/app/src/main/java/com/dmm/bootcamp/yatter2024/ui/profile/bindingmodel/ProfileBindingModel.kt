@@ -14,7 +14,11 @@ data class StatusBindingModel(
     val id: String,
     val displayName: String?,
     val username: String,
+    val note: String?,
     val avatar: String?,
+    //val header: URL?,
     val content: String,
+    val followingCount: Int,
+    val followerCount: Int,
     val attachmentMediaList: List<MediaBindingModel>
 )

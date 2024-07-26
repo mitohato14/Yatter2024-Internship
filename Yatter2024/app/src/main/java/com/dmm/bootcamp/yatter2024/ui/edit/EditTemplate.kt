@@ -1,4 +1,4 @@
-package com.dmm.bootcamp.yatter2024.ui.profile
+package com.dmm.bootcamp.yatter2024.ui.edit
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,12 +14,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.BottomAppBar
+import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -55,51 +57,29 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.dmm.bootcamp.yatter2024.R
 import com.dmm.bootcamp.yatter2024.domain.model.Me
-import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.MediaBindingModel
-import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.StatusBindingModel
+import com.dmm.bootcamp.yatter2024.ui.edit.bindingmodel.EditBindingModel
 import com.dmm.bootcamp.yatter2024.ui.theme.Yatter2024Theme
 import java.net.URL
 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ProfileTemplate(
-    statusBindingModel: StatusBindingModel,
-    statusList: List<StatusBindingModel>,
+fun EditTemplate(
     isLoading: Boolean,
-    isRefreshing: Boolean,
-    onRefresh: () -> Unit,
+    userName: String,
+    onChangedUserName: (String) -> Unit,
+    password: String,
+    onChangedPassword: (String) -> Unit,
     onClickProfile: () -> Unit,
     onClickHome: () -> Unit,
-    onClickEdit: () -> Unit,
 ) {
-    val pullRefreshState = rememberPullRefreshState(isRefreshing, onRefresh)
     val context = LocalContext.current
-
-    // プレイスホルダー画像の生成
-    val placeholder = ResourcesCompat.getDrawable(
-        context.resources,
-        R.drawable.avatar_placeholder,
-        null,
-    )
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Row {
-                        Text(text = "プロフィール")
-                        Spacer(modifier = Modifier.weight(1f))
-
-                        IconButton(onClick = onClickEdit ) {
-                        Icon(
-                            imageVector = Icons.Default.Create,
-                            contentDescription = "プロフィールの編集",
-                            modifier = Modifier.padding(end = 16.dp),
-                        )
-                        }
-                    }
-
+                        Text(text = "プロフィール編集")
                 }
 
             )
@@ -150,8 +130,7 @@ fun ProfileTemplate(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
-                .padding(8.dp)
-                .pullRefresh(pullRefreshState),
+                .padding(8.dp),
             contentAlignment = Alignment.Center,
         ) {
             Column(
@@ -160,11 +139,12 @@ fun ProfileTemplate(
             ) {
                 Spacer(modifier = Modifier.height(32.dp))
 
+                /*
                 AsyncImage(
                     modifier = Modifier.size(120.dp),
                     // ImageRequestを作成して、画像取得できていない状態のプレイスホルダー設定
                     model = ImageRequest.Builder(context)
-                        .data(statusBindingModel.avatar)
+                        .data(editBindingModel.avatar)
                         .placeholder(placeholder)
                         .error(placeholder)
                         .fallback(placeholder)
@@ -173,83 +153,67 @@ fun ProfileTemplate(
                     contentDescription = stringResource(id = R.string.public_timeline_avatar_content_description),
                     contentScale = ContentScale.Crop,
                 )
+                 */
+                /*
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    text = "ユーザー名",
+                    textAlign = TextAlign.Center,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                 */
 
                 Text(
-                    text = buildAnnotatedString {
-                        // appendで文字列セット
-                        append(statusBindingModel.displayName)
-                    },
-                    maxLines = 1, // 文字列が複数行にならないように指定
-                    overflow = TextOverflow.Ellipsis, // はみ出した分を「...」で表現
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.h6.copy(fontSize = 36.sp)// 文字を太字に
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    text = "ユーザー名"
                 )
+                /*
+                OutlinedTextField(
+                    singleLine = true,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
+                    value = username,
+                    onValueChange = onChangedUserName,
+                    placeholder = {
+                        Text(text = "username")
+                    },
+                )
+                
+                 */
 
                 Text(
-                    text = buildAnnotatedString {
-                        withStyle(
-                            style = SpanStyle(
-                                // 文字色を薄くするために、ContentAlpha.mediumを指定
-                                color = MaterialTheme.colors.onBackground.copy(alpha = ContentAlpha.medium),
-                            )
-                        ) {
-                            append(" @${statusBindingModel.username}")
-                        }
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "パスワード"
+                )
+                OutlinedTextField(
+                    singleLine = true,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
+                    value = password,
+                    onValueChange = onChangedPassword,
+                    placeholder = {
+                        Text(text = "password")
                     },
-                    maxLines = 1, // 文字列が複数行にならないように指定
-                    overflow = TextOverflow.Ellipsis, // はみ出した分を「...」で表現
-                    fontWeight = FontWeight.Bold, // 文字を太字に
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
-
-                Text(
-                    text = buildAnnotatedString {
-                        append(statusBindingModel.followingCount.toString())
-                        append(" Following")
-                    },
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.h6.copy(fontSize = 18.sp)// 文字を太字に
-                )
-
-
-                Text(
-                    text = buildAnnotatedString {
-                        append(statusBindingModel.followerCount.toString())
-                        append(" Follower")
-                    },
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.h6.copy(fontSize = 18.sp)// 文字を太字に
-                )
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                Text(
-                    text = buildAnnotatedString {
-                        append(statusBindingModel.note)
-                    },
-                    style = MaterialTheme.typography.h6.copy(fontSize = 12.sp)// 文字を太字に
-                )
-
-                Spacer(modifier = Modifier.height(32.dp))
-
-                //ページ下部に自分のタイムラインを表示
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(8.dp),
+                /*
+                Button(
+                    enabled = isEnableEdit,
+                    onClick = onClickLChange,
+                    modifier = Modifier
+                        .fillMaxWidth(),
                 ) {
-                    items(statusList) { item ->
-                        MyStatusRow(statusBindingModel = item)
-                    }
+                    Text(text = "編集")
                 }
-                PullRefreshIndicator(
-                    refreshing = isRefreshing,
-                    state = pullRefreshState,
-                    //modifier = Modifier.align(Alignment.TopCenter)
-                )
-                if (isLoading) {
-                    CircularProgressIndicator()
-                }
+
+                 */
             }
         }
     }
@@ -257,51 +221,17 @@ fun ProfileTemplate(
 
 @Preview
 @Composable
-private fun ProfileTemplatePreview() {
+private fun EditTemplatePreview() {
     Yatter2024Theme {
         Surface() {
-            ProfileTemplate(
-                statusBindingModel = StatusBindingModel(
-                    id = "id",
-                    displayName = "displayName",
-                    username = "username",
-                    note = "my_introducing_note",
-                    avatar = null,
-                    content = "preview content_default",
-                    followingCount = 0,
-                    followerCount = 0,
-                    attachmentMediaList = listOf()
-                ),
-                statusList = listOf(
-                    StatusBindingModel(
-                        id = "id1",
-                        displayName = "display name1",
-                        username = "username1",
-                        note = "note1",
-                        avatar = null,
-                        content = "preview content1",
-                        followingCount = 0,
-                        followerCount = 0,
-                        attachmentMediaList = listOf()
-                    ),
-                    StatusBindingModel(
-                        id = "id2",
-                        displayName = "display name2",
-                        username = "username2",
-                        note = "note2",
-                        avatar = null,
-                        content = "preview content2",
-                        followingCount = 0,
-                        followerCount = 0,
-                        attachmentMediaList = listOf()
-                    ),
-                ),
+            EditTemplate(
+                userName = "username",
+                onChangedUserName = {},
+                password = "password",
+                onChangedPassword = {},
                 isLoading = true,
-                isRefreshing = false,
-                onRefresh = {},
                 onClickProfile = {},
                 onClickHome = {},
-                onClickEdit = {},
             )
         }
     }

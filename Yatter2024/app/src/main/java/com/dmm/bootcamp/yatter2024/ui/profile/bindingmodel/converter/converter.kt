@@ -27,7 +27,10 @@ object StatusConverter {
             displayName = status.account.displayName ?: "",
             username = status.account.username.value,
             avatar = status.account.avatar?.toString(),
+            note = status.account.note,
             content = status.content,
+            followingCount = status.account.followingCount,
+            followerCount = status.account.followerCount,
             attachmentMediaList = MediaConverter.convertToBindingModel(status.attachmentMediaList)
         )
 }
