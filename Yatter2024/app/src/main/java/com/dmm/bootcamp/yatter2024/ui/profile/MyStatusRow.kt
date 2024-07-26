@@ -116,6 +116,8 @@ private fun MyStatusRowPreview() {
                     username = "mitohato14",
                     avatar = "https://avatars.githubusercontent.com/u/19385268?v=4",
                     content = "preview content",
+                    followingCount = 0,
+                    followerCount = 0,
                     attachmentMediaList = listOf(
                         MediaBindingModel(
                             id = "id",

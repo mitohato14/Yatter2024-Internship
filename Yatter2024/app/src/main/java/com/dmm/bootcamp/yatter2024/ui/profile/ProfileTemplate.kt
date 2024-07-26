@@ -159,15 +159,6 @@ fun ProfileTemplate(
                 modifier = Modifier.fillMaxSize()
             ) {
                 Spacer(modifier = Modifier.height(32.dp))
-                //ひとまずデフォルトのアイコン入れちゃったのでユーザのアイコンに変える
-                /*
-                Icon(
-                    imageVector = Icons.Default.AccountCircle,
-                    contentDescription = "default",
-                    modifier = Modifier.size(120.dp)
-                )
-                 */
-
 
                 AsyncImage(
                     modifier = Modifier.size(120.dp),
@@ -182,17 +173,6 @@ fun ProfileTemplate(
                     contentDescription = stringResource(id = R.string.public_timeline_avatar_content_description),
                     contentScale = ContentScale.Crop,
                 )
-                /*
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
-                    text = "ユーザー名",
-                    textAlign = TextAlign.Center,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                 */
 
                 Text(
                     text = buildAnnotatedString {
@@ -204,7 +184,6 @@ fun ProfileTemplate(
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.h6.copy(fontSize = 36.sp)// 文字を太字に
                 )
-
 
                 Text(
                     text = buildAnnotatedString {
@@ -222,17 +201,25 @@ fun ProfileTemplate(
                     fontWeight = FontWeight.Bold, // 文字を太字に
                 )
 
+                Spacer(modifier = Modifier.height(12.dp))
+
                 Text(
-                    modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
-                    text = "フォロー数",
-                    textAlign = TextAlign.Center,
-                    fontSize =16.sp,
+                    text = buildAnnotatedString {
+                        append(statusBindingModel.followingCount.toString())
+                        append(" Following")
+                    },
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.h6.copy(fontSize = 18.sp)// 文字を太字に
                 )
+
+
                 Text(
-                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
-                    text = "フォロワー数",
-                    textAlign = TextAlign.Center,
-                    fontSize = 16.sp,
+                    text = buildAnnotatedString {
+                        append(statusBindingModel.followerCount.toString())
+                        append(" Follower")
+                    },
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.h6.copy(fontSize = 18.sp)// 文字を太字に
                 )
 
                 Spacer(modifier = Modifier.height(32.dp))
@@ -271,6 +258,8 @@ private fun ProfileTemplatePreview() {
                     username = "username",
                     avatar = null,
                     content = "preview content_default",
+                    followingCount = 0,
+                    followerCount = 0,
                     attachmentMediaList = listOf()
                 ),
                 statusList = listOf(
@@ -280,6 +269,8 @@ private fun ProfileTemplatePreview() {
                         username = "username1",
                         avatar = null,
                         content = "preview content1",
+                        followingCount = 0,
+                        followerCount = 0,
                         attachmentMediaList = listOf()
                     ),
                     StatusBindingModel(
@@ -288,6 +279,8 @@ private fun ProfileTemplatePreview() {
                         username = "username2",
                         avatar = null,
                         content = "preview content2",
+                        followingCount = 0,
+                        followerCount = 0,
                         attachmentMediaList = listOf()
                     ),
                 ),

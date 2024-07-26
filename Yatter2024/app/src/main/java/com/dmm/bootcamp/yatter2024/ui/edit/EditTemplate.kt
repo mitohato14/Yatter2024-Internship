@@ -172,6 +172,7 @@ fun EditTemplate(
                         .padding(top = 16.dp),
                     text = "ユーザー名"
                 )
+                /*
                 OutlinedTextField(
                     singleLine = true,
                     modifier = Modifier
@@ -183,6 +184,8 @@ fun EditTemplate(
                         Text(text = "username")
                     },
                 )
+                
+                 */
 
                 Text(
                     modifier = Modifier.fillMaxWidth(),
@@ -200,6 +203,7 @@ fun EditTemplate(
                     },
                 )
 
+                /*
                 Button(
                     enabled = isEnableEdit,
                     onClick = onClickLChange,
@@ -208,6 +212,8 @@ fun EditTemplate(
                 ) {
                     Text(text = "編集")
                 }
+
+                 */
             }
         }
     }

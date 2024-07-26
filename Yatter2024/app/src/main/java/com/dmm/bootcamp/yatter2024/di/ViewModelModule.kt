@@ -18,5 +18,5 @@ internal val viewModelModule = module {
   viewModel { LoginViewModel(get()) }
   viewModel { MainViewModel(get()) }
   viewModel { ProfileViewModel(get(), get()) }
-  viewModel { EditViewModel(get(), get()) }
+  viewModel { EditViewModel(get()) }
 }

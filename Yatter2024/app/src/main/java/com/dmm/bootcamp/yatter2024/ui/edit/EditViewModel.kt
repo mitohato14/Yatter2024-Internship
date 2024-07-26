@@ -15,6 +15,8 @@ import com.dmm.bootcamp.yatter2024.ui.profile.ProfileDestination
 import com.dmm.bootcamp.yatter2024.ui.profile.ProfileUiState
 import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.converter.StatusConverter
 import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineDestination
+import com.dmm.bootcamp.yatter2024.usecase.edit.EditUseCase
+import com.dmm.bootcamp.yatter2024.usecase.edit.EditUseCaseResult
 import com.dmm.bootcamp.yatter2024.usecase.login.LoginUseCase
 import com.dmm.bootcamp.yatter2024.usecase.login.LoginUseCaseResult
 import kotlinx.coroutines.flow.MutableStateFlow

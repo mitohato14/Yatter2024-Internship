@@ -28,6 +28,8 @@ object StatusConverter {
             username = status.account.username.value,
             avatar = status.account.avatar?.toString(),
             content = status.content,
+            followingCount = status.account.followingCount,
+            followerCount = status.account.followerCount,
             attachmentMediaList = MediaConverter.convertToBindingModel(status.attachmentMediaList)
         )
 }

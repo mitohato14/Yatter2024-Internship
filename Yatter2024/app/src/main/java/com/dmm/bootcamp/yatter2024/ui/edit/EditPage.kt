@@ -22,10 +22,6 @@ fun EditPage(
         viewModel.onCompleteNavigation()
     }
 
-    LifecycleEventEffect(event = Lifecycle.Event.ON_CREATE) {
-        viewModel.onCreate()
-    }
-
     EditTemplate(
         isLoading = uiState.isLoading,
         userName = uiState.editBindingModel.username,
