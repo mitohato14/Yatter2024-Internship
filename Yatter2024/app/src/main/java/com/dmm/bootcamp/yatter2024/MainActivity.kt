@@ -21,10 +21,6 @@ class MainActivity : AppCompatActivity() {
     setContent {
       Yatter2024Theme {
         Surface {
-          //PublicTimelinePage()
-          //LoginPage()
-          //ProfilePage()
-
           //スプラッシュ画面を表示してからmainappに遷移するように
           val splashViewModel: SplashViewModel = getViewModel()
           val isSplashFinished by splashViewModel.isSplashFinished.collectAsState()
@@ -34,9 +30,9 @@ class MainActivity : AppCompatActivity() {
           } else {
             SplashPage()
           }
-          }
         }
       }
     }
   }
+}
 
