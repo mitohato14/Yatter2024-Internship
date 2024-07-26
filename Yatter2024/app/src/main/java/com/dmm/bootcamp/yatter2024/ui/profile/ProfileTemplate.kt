@@ -222,6 +222,15 @@ fun ProfileTemplate(
                     style = MaterialTheme.typography.h6.copy(fontSize = 18.sp)// 文字を太字に
                 )
 
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text(
+                    text = buildAnnotatedString {
+                        append(statusBindingModel.note)
+                    },
+                    style = MaterialTheme.typography.h6.copy(fontSize = 12.sp)// 文字を太字に
+                )
+
                 Spacer(modifier = Modifier.height(32.dp))
 
                 //ページ下部に自分のタイムラインを表示
@@ -256,6 +265,7 @@ private fun ProfileTemplatePreview() {
                     id = "id",
                     displayName = "displayName",
                     username = "username",
+                    note = "my_introducing_note",
                     avatar = null,
                     content = "preview content_default",
                     followingCount = 0,
@@ -267,6 +277,7 @@ private fun ProfileTemplatePreview() {
                         id = "id1",
                         displayName = "display name1",
                         username = "username1",
+                        note = "note1",
                         avatar = null,
                         content = "preview content1",
                         followingCount = 0,
@@ -277,6 +288,7 @@ private fun ProfileTemplatePreview() {
                         id = "id2",
                         displayName = "display name2",
                         username = "username2",
+                        note = "note2",
                         avatar = null,
                         content = "preview content2",
                         followingCount = 0,

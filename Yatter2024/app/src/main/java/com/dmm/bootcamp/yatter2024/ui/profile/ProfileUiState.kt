@@ -16,6 +16,7 @@ data class ProfileUiState(
                  id = "",
                  displayName = "",
                  username = "",
+                 note = "",
                  avatar = null,
                  content = "",
                  followingCount = 0,
