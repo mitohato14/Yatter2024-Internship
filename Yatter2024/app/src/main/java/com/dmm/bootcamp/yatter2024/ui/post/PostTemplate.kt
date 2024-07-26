@@ -25,9 +25,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.res.ResourcesCompat
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.dmm.bootcamp.yatter2024.R
 import com.dmm.bootcamp.yatter2024.ui.theme.Yatter2024Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -66,9 +70,25 @@ fun PostTemplate(
                     .fillMaxSize()
                     .padding(it)
             ) {
+                val context = LocalContext.current
+
+                // プレイスホルダー画像の生成
+                val placeholder = ResourcesCompat.getDrawable(
+                    context.resources,
+                    R.drawable.avatar_placeholder,
+                    null,
+                )
+
                 AsyncImage(
                     modifier = Modifier.size(64.dp),
-                    model = postBindingModel.avatarUrl,
+                    // ImageRequestを作成して、画像取得できていない状態のプレイスホルダー設定
+                    model = ImageRequest.Builder(context)
+                        .data(postBindingModel.avatarUrl)
+                        .placeholder(placeholder)
+                        .error(placeholder)
+                        .fallback(placeholder)
+                        .setHeader("User-Agent", "Mozilla/5.0") // モックサーバーから画像取得する場合のみ追加
+                        .build(),
                     contentDescription = "アバター画像",
                     contentScale = ContentScale.Crop
                 )
