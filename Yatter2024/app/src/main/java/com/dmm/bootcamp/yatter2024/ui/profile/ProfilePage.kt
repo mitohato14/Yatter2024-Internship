@@ -33,6 +33,7 @@ fun ProfilePage(
     }
 
     ProfileTemplate(
+        statusBindingModel = uiState.statusBindingModel,
         statusList = uiState.statusList,
         isLoading = uiState.isLoading,
         isRefreshing = uiState.isRefreshing,
