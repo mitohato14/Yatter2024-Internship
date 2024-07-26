@@ -1,6 +1,11 @@
 package com.dmm.bootcamp.yatter2024.ui.timeline
 
+import android.util.Log
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,12 +15,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -39,6 +47,7 @@ import com.dmm.bootcamp.yatter2024.ui.timeline.bindingmodel.StatusBindingModel
 fun StatusRow(
     statusBindingModel: StatusBindingModel,
     modifier: Modifier = Modifier,
+    onClickAvatar: (userName: String) -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -53,19 +62,31 @@ fun StatusRow(
             R.drawable.avatar_placeholder,
             null,
         )
-        AsyncImage(
-            modifier = Modifier.size(48.dp),
-            // ImageRequestを作成して、画像取得できていない状態のプレイスホルダー設定
-            model = ImageRequest.Builder(context)
-                .data(statusBindingModel.avatar)
-                .placeholder(placeholder)
-                .error(placeholder)
-                .fallback(placeholder)
-                .setHeader("User-Agent", "Mozilla/5.0") // モックサーバーから画像取得する場合のみ追加
-                .build(),
-            contentDescription = stringResource(id = R.string.public_timeline_avatar_content_description),
-            contentScale = ContentScale.Crop,
-        )
+        Box(
+            modifier = Modifier
+                .size(48.dp)
+                .clip(CircleShape) // 円形にクリップ
+                .background(Color.Gray) // プレースホルダーの背景色
+                .clickable {
+                    Log.d("StatusRow", "username: ${statusBindingModel.username}")
+                    onClickAvatar(statusBindingModel.username)
+                }
+                .border(1.dp, Color.Black) // 画像の周囲に境界線を追加（必要に応じて）
+        ) {
+            AsyncImage(
+                modifier = Modifier.size(48.dp),
+                // ImageRequestを作成して、画像取得できていない状態のプレイスホルダー設定
+                model = ImageRequest.Builder(context)
+                    .data(statusBindingModel.avatar)
+                    .placeholder(placeholder)
+                    .error(placeholder)
+                    .fallback(placeholder)
+                    .setHeader("User-Agent", "Mozilla/5.0") // モックサーバーから画像取得する場合のみ追加
+                    .build(),
+                contentDescription = stringResource(id = R.string.public_timeline_avatar_content_description),
+                contentScale = ContentScale.Crop,
+            )
+        }
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(
                 text = buildAnnotatedString {
@@ -120,8 +141,9 @@ private fun StatusRowPreview() {
                             type = "image",
                             url = "https://avatars.githubusercontent.com/u/39693306?v=4", description = "icon"
                         )
-                    )
-                )
+                    ),
+                ),
+                onClickAvatar = {},
             )
         }
     }

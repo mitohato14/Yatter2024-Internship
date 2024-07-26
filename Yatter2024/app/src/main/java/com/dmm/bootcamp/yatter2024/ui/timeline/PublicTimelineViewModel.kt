@@ -1,10 +1,12 @@
 package com.dmm.bootcamp.yatter2024.ui.timeline
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dmm.bootcamp.yatter2024.common.navigation.Destination
 import com.dmm.bootcamp.yatter2024.domain.repository.StatusRepository
 import com.dmm.bootcamp.yatter2024.ui.post.PostDestination
+import com.dmm.bootcamp.yatter2024.ui.profile.ProfileDestination
 import com.dmm.bootcamp.yatter2024.ui.timeline.bindingmodel.converter.StatusConverter
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -49,6 +51,13 @@ class PublicTimelineViewModel(
 
     fun onClickPost() {
         _destination.value = PostDestination()
+    }
+
+    fun onClickAvatar(username: String) {
+        // プロフィール画面へ遷移
+        ProfileDestination.createRoute(username)
+        Log.d("PublicTimelineViewModel", "route: ")
+        _destination.value = ProfileDestination()
     }
 
     fun onCompleteNavigation() {
