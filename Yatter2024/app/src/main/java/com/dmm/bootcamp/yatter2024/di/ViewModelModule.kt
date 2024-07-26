@@ -6,6 +6,7 @@ import com.dmm.bootcamp.yatter2024.ui.post.PostViewModel
 import com.dmm.bootcamp.yatter2024.ui.profile.ProfileViewModel
 import com.dmm.bootcamp.yatter2024.ui.register.RegisterViewModel
 import com.dmm.bootcamp.yatter2024.ui.timeline.PublicTimelineViewModel
+import com.dmm.bootcamp.yatter2024.ui.update.UpdateProfileViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -16,4 +17,5 @@ internal val viewModelModule = module {
  viewModel { RegisterViewModel(get()) }
  viewModel { LoginViewModel(get()) }
  viewModel { ProfileViewModel(get(), get()) }
+ viewModel { UpdateProfileViewModel(get(), get()) }
 }

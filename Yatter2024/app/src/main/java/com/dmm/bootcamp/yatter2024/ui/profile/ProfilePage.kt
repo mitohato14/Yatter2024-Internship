@@ -27,8 +27,10 @@ fun ProfilePage(
         }
     }
 
-    LifecycleEventEffect(event = Lifecycle.Event.ON_RESUME) {
+    LifecycleEventEffect(event = Lifecycle.Event.ON_CREATE) {
         viewModel.onCreate(userName)
+    }
+    LifecycleEventEffect(event = Lifecycle.Event.ON_RESUME) {
         viewModel.onResume()
     }
     ProfileTemplate(
