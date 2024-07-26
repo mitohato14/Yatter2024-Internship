@@ -28,6 +28,18 @@ private val lightColorPalette = lightColors(
   secondary = Blue200
 )
 
+private val darkGrayColorPalette = darkColors(
+  primary = Gray200,
+  primaryVariant = Gray700,
+  secondary = Gray200
+)
+
+private val lightGrayColorPalette = lightColors(
+  primary = Gray500,
+  primaryVariant = Gray700,
+  secondary = Gray200
+)
+
 @Composable
 fun Yatter2024Theme(
   darkTheme: Boolean = isSystemInDarkTheme(),
@@ -50,6 +62,21 @@ fun Yatter2024ThemeRegister(
 ) {
   val colorScheme =
     if (darkTheme) darkColorPalette else lightColorPalette
+
+  MaterialTheme(
+    colors = colorScheme,
+    typography = Typography,
+    content = content
+  )
+}
+
+@Composable
+fun Yatter2024ThemeProfile(
+  darkTheme: Boolean = isSystemInDarkTheme(),
+  content: @Composable () -> Unit
+) {
+  val colorScheme =
+    if (darkTheme) darkGrayColorPalette else lightGrayColorPalette
 
   MaterialTheme(
     colors = colorScheme,

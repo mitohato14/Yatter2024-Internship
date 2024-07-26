@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.dmm.bootcamp.yatter2024.ui.theme.Yatter2024Theme
 import com.dmm.bootcamp.yatter2024.ui.timeline.bindingmodel.StatusBindingModel
 
@@ -36,6 +37,7 @@ fun PublicTimelineTemplate(
     isRefreshing: Boolean,
     onRefresh: () -> Unit,
     onClickPost: () -> Unit,
+    onClickAvatar: (username: String) -> Unit,
 ){
     val pullRefreshState = rememberPullRefreshState(isRefreshing, onRefresh)
     Scaffold(
@@ -70,7 +72,7 @@ fun PublicTimelineTemplate(
             )
             {
                 items(statusList) { item ->
-                    StatusRow(statusBindingModel = item)
+                    StatusRow(statusBindingModel = item, onClickAvatar = onClickAvatar)
                 }
             }
             PullRefreshIndicator(
@@ -88,6 +90,7 @@ fun PublicTimelineTemplate(
 @Preview
 @Composable
 private fun PublicTimelineTemplatePreview() {
+    var navController: NavController? = null
     Yatter2024Theme {
         Surface {
             PublicTimelineTemplate(
@@ -113,6 +116,7 @@ private fun PublicTimelineTemplatePreview() {
                 isRefreshing = false,
                 onRefresh = {},
                 onClickPost = {},
+                onClickAvatar = {},
             )
         }
     }
