@@ -46,6 +46,5 @@ fun SplashTemplate(
 @Preview
 @Composable
 fun SplashTemplatePreview(){
-    SplashTemplate(
-    )
+    SplashTemplate()
 }
