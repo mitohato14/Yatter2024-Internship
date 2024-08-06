@@ -8,6 +8,7 @@ import com.dmm.bootcamp.yatter2024.domain.model.Username
 import com.dmm.bootcamp.yatter2024.domain.repository.AccountRepository
 import com.dmm.bootcamp.yatter2024.domain.service.GetMeService
 import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.converter.ProfileConverter
+import com.dmm.bootcamp.yatter2024.ui.update.UpdateProfileDestination
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -74,6 +75,7 @@ class ProfileViewModel (
 
     fun onClickUpdate() {
         // Profile更新画面へ遷移
+        _destination.value = UpdateProfileDestination()
     }
 
     fun onCompleteNavigation() {
