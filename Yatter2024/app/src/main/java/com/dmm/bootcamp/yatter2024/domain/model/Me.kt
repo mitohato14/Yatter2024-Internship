@@ -26,3 +26,4 @@ abstract class Me(
 
   abstract suspend fun unfollow(username: Username)
 }
+
