@@ -39,6 +39,11 @@ interface YatterApi {
     @Query("limit") limit: Int = 80
   ): List<StatusJson>
 
+  @GET("statuses/{id}")
+  suspend fun getStatusById(
+    @Path("id") id: String
+  ): StatusJson
+
   @POST("accounts")
   suspend fun createNewAccount(
     @Body accountJson: CreateAccountJson

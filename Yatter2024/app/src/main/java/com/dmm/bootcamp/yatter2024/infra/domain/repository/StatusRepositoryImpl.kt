@@ -4,9 +4,13 @@ import com.dmm.bootcamp.yatter2024.domain.model.Status
 import com.dmm.bootcamp.yatter2024.domain.model.StatusId
 import com.dmm.bootcamp.yatter2024.domain.repository.StatusRepository
 import com.dmm.bootcamp.yatter2024.auth.TokenProvider
+import com.dmm.bootcamp.yatter2024.domain.model.Account
+import com.dmm.bootcamp.yatter2024.domain.model.Username
 import com.dmm.bootcamp.yatter2024.infra.api.YatterApi
 import com.dmm.bootcamp.yatter2024.infra.api.json.PostStatusJson
+import com.dmm.bootcamp.yatter2024.infra.domain.converter.AccountConverter
 import com.dmm.bootcamp.yatter2024.infra.domain.converter.StatusConverter
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -15,8 +19,9 @@ class StatusRepositoryImpl(
   private val yatterApi: YatterApi,
   private val tokenProvider: TokenProvider,
 ) : StatusRepository {
-  override suspend fun findById(id: StatusId): Status? {
-    TODO("Not yet implemented")
+  override suspend fun findById(id: StatusId): Status? = withContext(Dispatchers.IO){
+    val statusJson = yatterApi.getStatusById(id = id.value)
+    StatusConverter.convertToDomainModel(statusJson)
   }
 
   override suspend fun findAllPublic(): List<Status> = withContext(IO) {
