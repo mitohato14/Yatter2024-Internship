@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Theme.MySplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/bird</item>
+        <item name="postSplashScreenTheme">@style/Theme.Yatter2024</item>
+    </style>
 
     <style name="Theme.Yatter2024" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
 </resources>

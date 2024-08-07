@@ -1,6 +1,5 @@
-package com.dmm.bootcamp.yatter2024.ui.timeline
+package com.dmm.bootcamp.yatter2024.ui.profile
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,25 +30,22 @@ import androidx.core.content.res.ResourcesCompat
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.dmm.bootcamp.yatter2024.R
+import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.MediaBindingModel
+import com.dmm.bootcamp.yatter2024.ui.profile.bindingmodel.StatusBindingModel
 import com.dmm.bootcamp.yatter2024.ui.theme.Yatter2024Theme
-import com.dmm.bootcamp.yatter2024.ui.timeline.bindingmodel.MediaBindingModel
-import com.dmm.bootcamp.yatter2024.ui.timeline.bindingmodel.StatusBindingModel
 
 
 @Composable
 fun StatusRow(
     statusBindingModel: StatusBindingModel,
     modifier: Modifier = Modifier,
-    onClickAvatar: (String) -> Unit,
-    onClickText: (String) -> Unit,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp)
-            .clickable { onClickText(statusBindingModel.id) },
+            .padding(vertical = 4.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
+    ){
         val context = LocalContext.current
 
         // プレイスホルダー画像の生成
@@ -60,9 +56,7 @@ fun StatusRow(
         )
 
         AsyncImage(
-            modifier = Modifier
-                .size(48.dp)
-                .clickable { onClickAvatar(statusBindingModel.username) },
+            modifier = Modifier.size(48.dp),
             // ImageRequestを作成して、画像取得できていない状態のプレイスホルダー設定
             model = ImageRequest.Builder(context)
                 .data(statusBindingModel.avatar)
@@ -75,9 +69,7 @@ fun StatusRow(
             contentScale = ContentScale.Crop,
         )
 
-        Column(
-            verticalArrangement = Arrangement.spacedBy(4.dp),
-        ) {
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(
                 text = buildAnnotatedString {
                     // appendで文字列セット
@@ -99,7 +91,7 @@ fun StatusRow(
 
             LazyRow {
                 // itemsの第一引数に並べたいデータセットを渡す
-                items(statusBindingModel.attachmentMediaList) { attachmentMedia ->
+                items(statusBindingModel.attachmentMediaList){attachmentMedia ->
                     AsyncImage(
                         model = attachmentMedia.url,
                         contentDescription = attachmentMedia.description
@@ -131,9 +123,7 @@ private fun StatusRowPreview() {
                             description = "icon"
                         )
                     )
-                ),
-                onClickAvatar = {},
-                onClickText = {},
+                )
             )
         }
     }
