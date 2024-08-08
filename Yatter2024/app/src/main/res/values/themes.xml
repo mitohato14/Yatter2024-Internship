@@ -2,4 +2,17 @@
 <resources>
 
     <style name="Theme.Yatter2024" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+
+<!--    splash_script-->
+    <style name="Theme.Yatter2024.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background to black -->
+        <item name="windowSplashScreenBackground">@android:color/black</item>
+        <!-- Use windowSplashScreenAnimatedIcon to add a drawable or an animated
+             drawable. -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/rounded_flutter_dash_24</item>
+        <!-- Set the theme of the Activity that follows your splash screen. -->
+        <item name="postSplashScreenTheme">@style/Theme.Yatter2024</item>
+    </style>
+    <!--    script-->
+
 </resources>
