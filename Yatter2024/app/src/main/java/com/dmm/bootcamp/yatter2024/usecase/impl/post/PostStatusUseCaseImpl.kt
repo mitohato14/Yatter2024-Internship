@@ -1,6 +1,7 @@
 package com.dmm.bootcamp.yatter2024.usecase.impl.post
 
 import android.accounts.AuthenticatorException
+import com.dmm.bootcamp.yatter2024.domain.model.MediaId
 import com.dmm.bootcamp.yatter2024.domain.repository.StatusRepository
 import com.dmm.bootcamp.yatter2024.usecase.post.PostStatusUseCase
 import com.dmm.bootcamp.yatter2024.usecase.post.PostStatusUseCaseResult
@@ -11,7 +12,7 @@ class PostStatusUseCaseImpl(
 ) : PostStatusUseCase {
   override suspend fun execute(
     content: String,
-    attachmentList: List<File>
+    attachmentList: List<MediaId>
   ): PostStatusUseCaseResult {
     if (content == "" && attachmentList.isEmpty()) {
       return PostStatusUseCaseResult.Failure.EmptyContent
@@ -20,7 +21,7 @@ class PostStatusUseCaseImpl(
     return try {
       statusRepository.create(
         content = content,
-        attachmentList = emptyList()
+        attachmentList = attachmentList
       )
 
       PostStatusUseCaseResult.Success
