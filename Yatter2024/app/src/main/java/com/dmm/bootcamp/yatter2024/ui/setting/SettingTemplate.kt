@@ -1,15 +1,18 @@
 package com.dmm.bootcamp.yatter2024.ui.setting
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
@@ -27,6 +30,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -82,61 +86,63 @@ fun SettingTemplate(
                 modifier = Modifier.fillMaxWidth(),
             ){
                 Box(
-                    modifier = Modifier.fillMaxWidth().height(80.dp).clickable(onClick = onChangedHeaderText)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp)
+                        .clickable(onClick = onChangedHeaderText)
                 ){
                     AsyncImage(
                         modifier = Modifier.fillMaxSize(),
                         model = ImageRequest.Builder(context)
-                            .data(settingBindingModel.me?.header)
+                            .data(settingBindingModel.me?.header.toString())
                             .setHeader("User-Agent","Mozilla/5.0")
                             .build(),
                         contentDescription = "Image of header",
                         contentScale = ContentScale.Crop,
                     )
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.Black.copy(alpha = 0.5f))
-                    )
-                    Text(text = "Change the header")
+//                    Box(
+//                        modifier = Modifier
+//                            .fillMaxSize()
+//                            .background(Color.Black.copy(alpha = 0.5f))
+//                    )
+                    Image(imageVector = Icons.Default.Create, contentDescription = "Edit",modifier = Modifier.fillMaxHeight().width(70.dp))
                 }
 
                 Row{
                     Box(
-                        modifier = Modifier.size(48.dp).clickable(onClick = onChangedAvatarText)
+                        modifier = Modifier
+                            .size(48.dp)
+                            .clickable(onClick = onChangedAvatarText)
                     ){
                         AsyncImage(
                             modifier = Modifier.fillMaxSize(),
                             model = ImageRequest.Builder(context)
-                                .data(settingBindingModel.me?.avatar)
+                                .data(settingBindingModel.me?.avatar.toString())
                                 .setHeader("User-Agent","Mozilla/5.0")
                                 .build(),
                             contentDescription = "Image of avatar",
                             contentScale = ContentScale.Crop,
                         )
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(Color.Black.copy(alpha = 0.5f))
-                        )
-                        Text(text = "Change the avatar")
+//                        Box(
+//                            modifier = Modifier
+//                                .fillMaxSize()
+//                                .background(Color.Black.copy(alpha = 0.5f))
+//                        )
+                        Image(imageVector = Icons.Default.Create, contentDescription = "Edit",modifier = Modifier.fillMaxSize())
                     }
-                    Column{
-                        TextField(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f),
-                            value = settingBindingModel.newDisplayName ?: "",
-                            onValueChange = onChangedDisplayNameText,
-                            colors = TextFieldDefaults.textFieldColors(
-                                backgroundColor = Color.Transparent,
-                                focusedIndicatorColor = Color.Transparent,
-                                unfocusedIndicatorColor = Color.Transparent,
-                                disabledIndicatorColor = Color.Transparent,
-                            ),
-                        )
-
-                    }
+                    TextField(
+                        modifier = Modifier
+                            .width(50.dp)
+                            .weight(1f),
+                        value = settingBindingModel.newDisplayName ?: "",
+                        onValueChange = onChangedDisplayNameText,
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            disabledIndicatorColor = Color.Transparent,
+                        ),
+                    )
                     Button(onClick = onClickChanged) {
                         Text(text = "Complete")
                     }

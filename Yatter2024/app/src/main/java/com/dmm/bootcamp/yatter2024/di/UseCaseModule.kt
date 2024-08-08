@@ -1,5 +1,7 @@
 package com.dmm.bootcamp.yatter2024.di
 
+import com.dmm.bootcamp.yatter2024.usecase.image.ImageStatusUseCase
+import com.dmm.bootcamp.yatter2024.usecase.impl.image.ImageStatusUseCaseImpl
 import com.dmm.bootcamp.yatter2024.usecase.impl.login.LoginUseCaseImpl
 import com.dmm.bootcamp.yatter2024.usecase.impl.post.PostStatusUseCaseImpl
 import com.dmm.bootcamp.yatter2024.usecase.impl.register.RegisterAccountUseCaseImpl
@@ -15,4 +17,5 @@ internal val useCaseModule = module {
   factory<RegisterAccountUseCase> { RegisterAccountUseCaseImpl(get(), get(), get()) }
   factory<LoginUseCase> { LoginUseCaseImpl(get(), get()) }
   factory<SettingStatusUseCase> {SettingStatusUseCaseImpl(get())}
+  factory<ImageStatusUseCase> { ImageStatusUseCaseImpl(get()) }
 }

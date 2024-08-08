@@ -45,6 +45,7 @@ class SettingViewModel (
                 it.copy(
                     settingBindingModel = snapshotBindingModel.copy(
                         newNote = me?.note,
+                        me = me,
                         newAvatar = me?.avatar.toString(),
                         newHeader = me?.header.toString(),
                         newDisplayName = me?.displayName,
@@ -115,8 +116,9 @@ class SettingViewModel (
             when(result) {
                 SettingStatusUseCaseResult.Success -> {
                     _uiState.update{
+                        val newMe = getMeService.execute()
                         it.copy(settingBindingModel = snapshotBindingModel.copy(
-                            newHeader = me?.header.toString(),
+                            newHeader = newMe?.header.toString(),
                         ))
                     }
                 }

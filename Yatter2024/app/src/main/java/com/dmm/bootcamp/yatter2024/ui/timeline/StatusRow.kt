@@ -12,12 +12,18 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Colors
 import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -55,7 +61,9 @@ fun StatusRow(
             null,
         )
         AsyncImage(
-            modifier = Modifier.size(48.dp).clickable { onClickAvatar(statusBindingModel.username) },
+            modifier = Modifier
+                .size(48.dp)
+                .clickable { onClickAvatar(statusBindingModel.username) },
             model = ImageRequest.Builder(context)
                 .data(statusBindingModel.avatar)
                 .placeholder(placeholder)
@@ -92,6 +100,16 @@ fun StatusRow(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                 }
+            }
+            IconButton(
+                modifier = Modifier.size(40.dp),
+                onClick = {}
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    tint = Color.Cyan,
+                    contentDescription = "Favorite",
+                )
             }
         }
     }

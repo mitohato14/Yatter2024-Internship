@@ -45,6 +45,7 @@ class ProfileViewModel(
                 it.copy(
                     profileBindingModel = ProfileBindingModel(
                         myname = me?.username?.value,
+                        note = account?.note,
                         username = username,
                         numFollow = account?.followingCount,
                         numFollower = account?.followerCount,

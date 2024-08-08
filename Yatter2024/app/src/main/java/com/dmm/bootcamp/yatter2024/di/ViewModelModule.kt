@@ -13,7 +13,7 @@ import org.koin.dsl.module
 internal val viewModelModule = module {
   viewModel { MainViewModel(get()) }
   viewModel { PublicTimelineViewModel(get(),get()) }
-  viewModel { PostViewModel(get(), get()) }
+  viewModel { PostViewModel(get(), get(),get()) }
   viewModel { RegisterViewModel(get()) }
   viewModel { LoginViewModel(get()) }
   viewModel { params -> ProfileViewModel(get(),get(),get(),get(),params.get())}

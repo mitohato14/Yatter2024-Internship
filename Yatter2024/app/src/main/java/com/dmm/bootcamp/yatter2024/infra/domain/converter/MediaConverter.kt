@@ -10,8 +10,8 @@ object MediaConverter {
 
   private fun convertToDomainModel(json: MediaJson): Media = Media(
     id = MediaId(value = json.id),
-    type = json.type,
+    type = json.type ?: "",
     url = json.url,
-    description = json.description,
+    description = json.description ?: "",
   )
 }

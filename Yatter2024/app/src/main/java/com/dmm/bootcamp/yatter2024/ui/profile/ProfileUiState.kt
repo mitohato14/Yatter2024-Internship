@@ -16,6 +16,7 @@ data class ProfileUiState(
             statusList = emptyList(),
             profileBindingModel = ProfileBindingModel(
                 myname = null,
+                note = "",
                 id = "",
                 username = "",
                 numPost = 0,

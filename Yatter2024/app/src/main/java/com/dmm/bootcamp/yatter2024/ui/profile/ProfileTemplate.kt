@@ -134,7 +134,7 @@ fun ProfileTemplate(
                         }
                     }
                 }
-                // bio
+                Text(profileBindingModel.note ?: "ノートはありません")
                 Row{
                     TextButton(onClick = onClickFollow) {
                         Text("${profileBindingModel.numFollow} Follow")

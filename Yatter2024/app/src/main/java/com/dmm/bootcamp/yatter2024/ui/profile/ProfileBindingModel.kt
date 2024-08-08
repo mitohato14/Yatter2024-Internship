@@ -8,6 +8,7 @@ import java.net.URL
 data class ProfileBindingModel(
     val myname: String?,
     val username: String,
+    val note: String?,
     val numPost : Int?,
     val numFollow : Int?,
     val numFollower : Int?,

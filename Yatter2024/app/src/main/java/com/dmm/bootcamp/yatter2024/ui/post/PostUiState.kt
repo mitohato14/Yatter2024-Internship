@@ -8,7 +8,9 @@ data class PostUiState(
         fun empty(): PostUiState = PostUiState(
             bindingModel = PostBindingModel(
                 avatarUrl = null,
-                statusText = ""
+                statusText = "",
+                attachmentList = listOf(),
+                mediaIdList = listOf(),
             ),
             isLoading = false,
         )

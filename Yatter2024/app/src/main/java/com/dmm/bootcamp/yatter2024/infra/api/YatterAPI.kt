@@ -6,6 +6,7 @@ import com.dmm.bootcamp.yatter2024.infra.api.json.CreateAccountJson
 import com.dmm.bootcamp.yatter2024.infra.api.json.LoginRequestBodyJson
 import com.dmm.bootcamp.yatter2024.infra.api.json.LoginResponseJson
 import com.dmm.bootcamp.yatter2024.infra.api.json.MediaJson
+import com.dmm.bootcamp.yatter2024.infra.api.json.MediaResponseJson
 import com.dmm.bootcamp.yatter2024.infra.api.json.PostStatusJson
 import com.dmm.bootcamp.yatter2024.infra.api.json.StatusJson
 import com.dmm.bootcamp.yatter2024.infra.api.json.UpdateAccountJson
@@ -71,5 +72,8 @@ interface YatterApi {
     @Header("Authentication") token: String,
     @Body accountJson: RequestBody
   ): AccountJson
-
+  @POST("media")
+  suspend fun registerMedia(
+    @Body mediaJson: RequestBody
+  ): MediaResponseJson
 }
