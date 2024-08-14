@@ -15,6 +15,7 @@ class MeImpl(
   header: URL?,
   followingCount: Int,
   followerCount: Int,
+  createdAt: String,
 ) : Me(
   id = id,
   username = username,
@@ -24,6 +25,7 @@ class MeImpl(
   header = header,
   followingCount = followingCount,
   followerCount = followerCount,
+  createdAt = createdAt,
 ) {
   override suspend fun follow(username: Username) {
     TODO("Not yet implemented")

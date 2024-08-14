@@ -15,6 +15,7 @@ object MeConverter {
       header = account.header,
       followingCount = account.followingCount,
       followerCount = account.followerCount,
+      createdAt = account.createdAt,
     )
   }
 }

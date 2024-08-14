@@ -59,7 +59,8 @@ class StatusRepositoryImplSpec {
           avatar = URL("https://www.google.com"),
           header = URL("https://www.google.com"),
           followingCount = 100,
-          followerCount = 200
+          followerCount = 200,
+          createdAt = ""
         ),
         content = "content",
         attachmentMediaList = emptyList()

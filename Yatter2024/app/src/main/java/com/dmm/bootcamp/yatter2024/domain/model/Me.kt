@@ -11,6 +11,7 @@ abstract class Me(
   header: URL?,
   followingCount: Int,
   followerCount: Int,
+  createdAt: String,
 ) : Account(
   id,
   username,
@@ -20,6 +21,7 @@ abstract class Me(
   header,
   followingCount,
   followerCount,
+  createdAt,
 ) {
 
   abstract suspend fun follow(username: Username)

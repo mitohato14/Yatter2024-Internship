@@ -17,6 +17,7 @@ class AccountImpl(
   header: URL?,
   followingCount: Int,
   followerCount: Int,
+  createdAt: String,
 ) : Account(
   id,
   username,
@@ -26,6 +27,7 @@ class AccountImpl(
   header,
   followingCount,
   followerCount,
+  createdAt,
 ) {
   override suspend fun followings(): List<Account> = withContext(Dispatchers.IO) {
     TODO("Not yet implemented")
